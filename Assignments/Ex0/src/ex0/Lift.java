@@ -2,10 +2,126 @@ package ex0;
 
 import ex0.algo.ElevatorAlgo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.TreeSet;
+import java.util.*;
+
+class LiftCaller{
+    Elevator e;
+    LinkedList<LiftLevel> callsUp;
+    LinkedList<LiftLevel> callsDown;
+    int eState;
+
+    public LiftCaller(Elevator e){
+        this.e = e;
+        eState = Elevator.LEVEL;
+        callsUp = new LinkedList<>();
+        callsDown = new LinkedList<>();
+    }
+    public int relativeState(int src, int dest){
+        if (dest == src) return Elevator.LEVEL;
+        return dest > src ? Elevator.UP : Elevator.DOWN;
+    }
+
+    public int relativeState(int level){
+        return relativeState(e.getPos(), level);
+    }
+
+    public void add2Calls(LiftLevel level, int eState){
+        if (eState == Elevator.UP) callsUp.add(level);
+        else callsDown.add(level);
+    }
+    public void addCall(LiftCall call){
+        int cState;
+        if (eState == Elevator.LEVEL){
+            eState = relativeState(call.src);
+        }
+        cState = relativeState(call.src, call.dest); // Call State
+        add2Calls(new LiftLevel(call.src, eState), cState);
+        add2Calls(new LiftLevel(call.dest, Elevator.LEVEL), cState);
+    }
+
+    public int getState(){
+        return e.getState();
+    }
+    public int getPos(){
+        return e.getPos();
+    }
+    public void sortByExtreme(){
+
+    }
+}
+class LiftLevel{
+    int level;
+    int levelState;
+    public LiftLevel(int level, int levelState){
+        this.level = level;
+        this.levelState = levelState;
+    }
+}
+
+class LiftCall{
+    int src, dest;
+    public LiftCall(int src, int dest){
+        this.src = src;
+        this.dest = dest;
+    }
+    public int getState()
+    {
+        if (src == dest) return Elevator.LEVEL;
+        return dest > src ? Elevator.UP : Elevator.DOWN;
+    }
+}
+
+class Lift implements ElevatorAlgo {
+    private final Building building;
+    LiftCaller[] calls;
+
+    public Lift(Building building){
+        this.building = building;
+        calls = new LiftCaller[building.numberOfElevetors()];
+        for (int i = 0; i < calls.length; i++) {
+            calls[i] = new LiftCaller(building.getElevetor(i));
+        }
+    }
+    /**
+     * @return the Building on which the (online) elevator algorithm works on.
+     */
+    @Override
+    public Building getBuilding() {
+        return this.building;
+    }
+
+    /**
+     * @return The algorithm name
+     */
+    @Override
+    public String algoName() {
+        return "Lift algorithm";
+    }
+
+    /**
+     * This method is the main optimal allocation (aka load-balancing) algorithm for allocating the
+     * "best" elevator for a call (over all the elevators in the building).
+     *
+     * @param c the call for elevator (src, dest)
+     * @return the index of the elevator to which this call was allocated to.
+     */
+    @Override
+    public int allocateAnElevator(CallForElevator c) {
+        return 0;
+    }
+
+    /**
+     * This method is the low level command for each elevator in terms of the elevator API: GoTo, Stop,
+     * The simulator calls the method every time stamp (dt), note: in most cases NO action is needed.
+     *
+     * @param elev the current Elevator index on which the operation is performs.
+     */
+    @Override
+    public void cmdElevator(int elev) {
+    }
+}
+
+
 
 class LiftCallsV1{
     Elevator e;
@@ -15,7 +131,7 @@ class LiftCallsV1{
     Comparator<CallBundler> upComp = (o1, o2) -> {
         if (o1.getSrc() == o2.getSrc()) return 0;
         else return o1.getSrc() > o2.getSrc() ? 1 : -1;
-};
+    };
     Comparator<CallBundler> downComp = (o1, o2) -> {
         if (o1.getSrc() == o2.getSrc()) return 0;
         else return o1.getSrc() > o2.getSrc() ? -1 : 1;
@@ -108,53 +224,6 @@ class CallBundler{
         return this.c.getDest();
     }
 }
-
-class Lift implements ElevatorAlgo {
-    private final Building building;
-    LiftCallsV1[] calls;
-    public Lift(Building building){
-        this.building = building;
-
-    }
-    /**
-     * @return the Building on which the (online) elevator algorithm works on.
-     */
-    @Override
-    public Building getBuilding() {
-        return this.building;
-    }
-
-    /**
-     * @return The algorithm name
-     */
-    @Override
-    public String algoName() {
-        return "Lift algorithm";
-    }
-
-    /**
-     * This method is the main optimal allocation (aka load-balancing) algorithm for allocating the
-     * "best" elevator for a call (over all the elevators in the building).
-     *
-     * @param c the call for elevator (src, dest)
-     * @return the index of the elevator to which this call was allocated to.
-     */
-    @Override
-    public int allocateAnElevator(CallForElevator c) {
-        return 0;
-    }
-
-    /**
-     * This method is the low level command for each elevator in terms of the elevator API: GoTo, Stop,
-     * The simulator calls the method every time stamp (dt), note: in most cases NO action is needed.
-     *
-     * @param elev the current Elevator index on which the operation is performs.
-     */
-    @Override
-    public void cmdElevator(int elev) {
-    }
-}
-
 
 class LiftV2 implements ElevatorAlgo {
     private final Building building;
