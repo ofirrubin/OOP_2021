@@ -174,7 +174,9 @@ public class LiftAlgo implements ElevatorAlgo{
      * @return the index of the elevator to which this call was allocated to.
      */
 
-    private int newAllocator(CallForElevator c){
+
+    @Override
+    public int allocateAnElevator(CallForElevator c) {
         Lift selectedLift = lifts.first();
         double liftTime = Integer.MAX_VALUE, temp;
         for(Lift l: lifts){
@@ -186,11 +188,6 @@ public class LiftAlgo implements ElevatorAlgo{
         }
         selectedLift.addCall(c.getSrc(), c.getDest());
         return selectedLift.e.getID();
-    }
-
-    @Override
-    public int allocateAnElevator(CallForElevator c) {
-        return newAllocator(c);
     }
 
     /**
