@@ -5,33 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Uploaded">
-      <change afterPath="$PROJECT_DIR$/../../.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Ex0/Ex0.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ex2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/G1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/G2.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/G3.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/api/DirectedWeightedGraph.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/api/DirectedWeightedGraphAlgorithms.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/api/EdgeData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/api/GeoLocation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/api/NodeData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/impl/Edge.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/impl/Geo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/impl/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/OOP_2021.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/OOP_2021.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/NodeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/NodeData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +29,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="21rgBOs9vgwEqM08bztZdO3Xnaq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -84,8 +55,16 @@
       <workItem from="1638784072799" duration="2135000" />
       <workItem from="1638809930059" duration="5892000" />
       <workItem from="1638869577877" duration="1748000" />
-      <workItem from="1638888586165" duration="11344000" />
+      <workItem from="1638888586165" duration="11441000" />
     </task>
+    <task id="LOCAL-00001" summary="Uploaded">
+      <created>1638916678546</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1638916678546</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
