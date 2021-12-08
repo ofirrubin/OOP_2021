@@ -59,20 +59,55 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
      * @return
      */
     @Override
-    public boolean isConnected() {
-        // Choose a node (doesn't mather which) as a head, if the node contains connection to all nodes and all nodes has connections to it,
+    public boolean isConnected()
+    {   // DFS based is connected. We will check if a graph is connected by going through the graph from a selected node and using a checklist
+        // we will mark each node as if visited, Then we will go through visited list of each node and check if any node haven't been visited,
+        // If so, the graph is not connected. Because this graph is directed - we have to check if we can go through the opposite way -> from each node to the selected node.
+
         if (graph == null) return false;
+        HashMap<Integer, Boolean> visited = new HashMap<>();
         Iterator<NodeData> nIter = graph.nodeIter();
-        if (!nIter.hasNext()) return false;
-        NodeData n = nIter.next();
-        // It is a connected graph.
+        DirectedWeightedGraph trnsp = new DWGraph();
+        NodeData n = nIter.next(); // Select a starting node
 
-        // Using DFS find paths to each node,
-        // If one not found we can stop
-        // For every node, Find a path to the head.
+        putInverseEdges(graph, trnsp, n); // Add node if not in graph and it's edges in reverse (src->dest => dest->src)
+        visited.put(n.getKey(), false);
 
+        // Add all nodes to visited as false and set transpose graph.
+        while(nIter.hasNext()){
+            NodeData nD = nIter.next();
+            putInverseEdges(graph, trnsp, nD);
+            visited.put(nD.getKey(), false);
+        }
 
-        return false;
+        DFS(graph, n, visited);
+        for(int k: visited.keySet())
+            if (!visited.get(k)) return false;
+
+        visited.replaceAll((k, v) -> false);
+        DFS(trnsp, n, visited);
+        for(int k: visited.keySet())
+            if (!visited.get(k)) return false;
+
+        return true;
+    }
+
+    private static void putInverseEdges(DirectedWeightedGraph src, DirectedWeightedGraph dest, NodeData d){
+        for (Iterator<EdgeData> it = src.edgeIter(d.getKey()); it.hasNext(); ) {
+            EdgeData e = it.next();
+            if (dest.getNode(e.getDest()) == null)
+                dest.addNode(src.getNode(e.getDest()));
+            dest.connect(e.getDest(), e.getSrc(), e.getWeight());
+        }
+    }
+
+    private static void DFS(DirectedWeightedGraph graph, NodeData startingAt, HashMap<Integer, Boolean> visited){
+        visited.put(startingAt.getKey(), false);
+        for (Iterator<EdgeData> it = graph.edgeIter(startingAt.getKey()); it.hasNext(); ) {
+            int key = it.next().getDest();
+            if (!visited.get(key))
+                DFS(graph, graph.getNode(key), visited);
+        }
     }
 
     /**
@@ -147,7 +182,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
             explored.add(nData.getKey());
             for (Iterator<EdgeData> it = graph.edgeIter(nData.getKey()); it.hasNext(); ) {
                 EdgeData edgs = it.next();
-                NodeData n = graph.getNode(edgs.getDest() == nData.getKey() ? edgs.getSrc(): edgs.getDest());
+                NodeData n = graph.getNode(edgs.getDest());
                 weight = weights.get(nData.getKey()) + edgs.getWeight(); // nData is in weights as we always adding it while adding to frontier.
                 if (explored.contains(n.getKey())){
                     if (weight < n.getWeight())
