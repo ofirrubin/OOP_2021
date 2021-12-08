@@ -59,8 +59,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
      * @return
      */
     @Override
-    public boolean isConnected()
-    {   // DFS based is connected. We will check if a graph is connected by going through the graph from a selected node and using a checklist
+    public boolean isConnected() {   // DFS based is connected. We will check if a graph is connected by going through the graph from a selected node and using a checklist
         // we will mark each node as if visited, Then we will go through visited list of each node and check if any node haven't been visited,
         // If so, the graph is not connected. Because this graph is directed - we have to check if we can go through the opposite way -> from each node to the selected node.
 
@@ -74,25 +73,25 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         visited.put(n.getKey(), false);
 
         // Add all nodes to visited as false and set transpose graph.
-        while(nIter.hasNext()){
+        while (nIter.hasNext()) {
             NodeData nD = nIter.next();
             putInverseEdges(graph, trnsp, nD);
             visited.put(nD.getKey(), false);
         }
 
         DFS(graph, n, visited);
-        for(int k: visited.keySet())
+        for (int k : visited.keySet())
             if (!visited.get(k)) return false;
 
         visited.replaceAll((k, v) -> false);
         DFS(trnsp, n, visited);
-        for(int k: visited.keySet())
+        for (int k : visited.keySet())
             if (!visited.get(k)) return false;
 
         return true;
     }
 
-    private static void putInverseEdges(DirectedWeightedGraph src, DirectedWeightedGraph dest, NodeData d){
+    private static void putInverseEdges(DirectedWeightedGraph src, DirectedWeightedGraph dest, NodeData d) {
         for (Iterator<EdgeData> it = src.edgeIter(d.getKey()); it.hasNext(); ) {
             EdgeData e = it.next();
             if (dest.getNode(e.getDest()) == null)
@@ -101,7 +100,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         }
     }
 
-    private static void DFS(DirectedWeightedGraph graph, NodeData startingAt, HashMap<Integer, Boolean> visited){
+    private static void DFS(DirectedWeightedGraph graph, NodeData startingAt, HashMap<Integer, Boolean> visited) {
         visited.put(startingAt.getKey(), false);
         for (Iterator<EdgeData> it = graph.edgeIter(startingAt.getKey()); it.hasNext(); ) {
             int key = it.next().getDest();
@@ -124,7 +123,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         if (prvs == null || prvs.size() == 0)
             return -1;
         double size = 0;
-        for(Integer next: prvs.keySet())
+        for (Integer next : prvs.keySet())
             size += graph.getNode(next).getWeight() + graph.getEdge(prvs.get(next), next).getWeight();
 
         return size;
@@ -135,16 +134,16 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
      * src--> n1-->n2-->...dest
      * see: https://en.wikipedia.org/wiki/Shortest_path_problem
      * Note if no such path --> returns null;
-     *
-     *
-     *  ALGORITHM: The algorithm is Uniform-Cost-Serach which is optimized version of Dijkstra's algorithm,
-     *  as described here: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Pseudocode
-     *  The psudo code described there seem to be partial, thus I implemented the algorithm according
-     *  to the psudo code described in this website:
-     *  https://www.baeldung.com/cs/uniform-cost-search-vs-dijkstras
-     *
-     *  The algorithm is better than Dijsktra's as it doesn't load all nodes but only the ones in use which allows
-     *  working on a very large graph.
+     * <p>
+     * <p>
+     * ALGORITHM: The algorithm is Uniform-Cost-Serach which is optimized version of Dijkstra's algorithm,
+     * as described here: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Pseudocode
+     * The psudo code described there seem to be partial, thus I implemented the algorithm according
+     * to the psudo code described in this website:
+     * https://www.baeldung.com/cs/uniform-cost-search-vs-dijkstras
+     * <p>
+     * The algorithm is better than Dijsktra's as it doesn't load all nodes but only the ones in use which allows
+     * working on a very large graph.
      *
      * @param src  - start node
      * @param dest - end (target) node
@@ -156,7 +155,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         return previousList == null ? null : buildPath(src, dest, previousList);
     }
 
-    private HashMap<Integer, Integer> shortestPathPointer(int src, int dest){
+    private HashMap<Integer, Integer> shortestPathPointer(int src, int dest) {
         double weight;
         NodeData nData = graph.getNode(src);
         // I need to save keys, weights & previous as I don't want to edit the graph.
@@ -173,9 +172,9 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         weights.put(nData.getKey(), 0.0);
         frontier.add(nData);
 
-        while(!frontier.isEmpty()){
+        while (!frontier.isEmpty()) {
             nData = frontier.poll();
-            if (nData.getKey() == dest){
+            if (nData.getKey() == dest) {
                 return previous;
             }
 
@@ -184,14 +183,12 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
                 EdgeData edgs = it.next();
                 NodeData n = graph.getNode(edgs.getDest());
                 weight = weights.get(nData.getKey()) + edgs.getWeight(); // nData is in weights as we always adding it while adding to frontier.
-                if (explored.contains(n.getKey())){
-                    if (weight < n.getWeight())
-                    {
+                if (explored.contains(n.getKey())) {
+                    if (weight < n.getWeight()) {
                         weights.put(n.getKey(), weight);
                         previous.put(n.getKey(), nData.getKey());
                         frontier.add(n);
-                    }
-                    else{
+                    } else {
                         weights.put(n.getKey(), weight);
                         frontier.add(n);
                         previous.put(n.getKey(), nData.getKey());
@@ -205,15 +202,16 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
     /**
      * Helper function for shortestPath, returns a List<NodeData> from the HashMap<Integer, Integer = Key, PreviousKey>
      * The function goes through the dest call to the src call and adding it to a list of Nodes which it gets from the graph.
-     * @param src The stop node, coming from dest node
+     *
+     * @param src  The stop node, coming from dest node
      * @param dest The start node
      * @param prev HashMap that describes the nodes relation
      * @return List<NodeData> as required by shortestPath function.
      */
-    private List<NodeData> buildPath(int src, int dest, HashMap<Integer, Integer> prev){
+    private List<NodeData> buildPath(int src, int dest, HashMap<Integer, Integer> prev) {
         ArrayList<NodeData> nodes = new ArrayList<>();
         int v = dest;
-        while (v != src){
+        while (v != src) {
             nodes.add(graph.getNode(v));
             v = prev.get(v);
         }
@@ -230,7 +228,33 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
      */
     @Override
     public NodeData center() {
-        return null;
+        // ASSUMING THE GRAPH IS CONNECTED
+
+        HashMap<Integer, Double> nDistances = new HashMap<>();  // Here we will save the distance from each node to any other node.
+
+        // Validate that the graph is not empty.
+        Iterator<NodeData> nIter = graph.nodeIter();
+        if (!nIter.hasNext())
+            return null;
+        int minimum = nIter.next().getKey(); // Setting the minimum to a
+
+        // For every node in the graph - set this distances to 0 and iterate any other node, calculate the time to him and add it to the distances.
+        graph.nodeIter().forEachRemaining(current -> {
+            nDistances.put(current.getKey(), 0.0);
+            graph.nodeIter().forEachRemaining(node -> {
+                if (node.getKey() != current.getKey())
+                    nDistances.put(node.getKey(),
+                            nDistances.get(node.getKey()) + shortestPathDist(current.getKey(), node.getKey()));
+
+            });
+        });
+        // After we calculated the distances find the minimum one, I couldn't get it inside the lambda expression,
+        // Seems like this is disallowed in java, could save some iterations...
+        for(int k: nDistances.keySet()){
+            if (nDistances.get(k) < nDistances.get(minimum))
+                minimum = k;
+        }
+        return graph.getNode(minimum);
     }
 
     /**
@@ -256,13 +280,12 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
     @Override
     public boolean save(String file) {
         File f = new File(file);
-        try{
-            if ((f.exists() || f.createNewFile()) && f.canWrite()){
+        try {
+            if ((f.exists() || f.createNewFile()) && f.canWrite()) {
                 Gson gson = new Gson();
                 gson.toJson(graph, new FileWriter(f));
                 return true;
-            }
-            else
+            } else
                 return false;
         } catch (IOException e) {
             return false;
