@@ -4,7 +4,7 @@ import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
 import api.EdgeData;
 import api.NodeData;
-import com.google.gson.Gson;
+
 
 import java.io.*;
 import java.util.*;
@@ -119,13 +119,17 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
      */
     @Override
     public double shortestPathDist(int src, int dest) {
-        HashMap<Integer, Integer> prvs = shortestPathPointer(src, dest);
-        if (prvs == null || prvs.size() == 0)
-            return -1;
-        double size = 0;
-        for (Integer next : prvs.keySet())
-            size += graph.getNode(next).getWeight() + graph.getEdge(prvs.get(next), next).getWeight();
+        return pathDistance(shortestPath(src, dest));
+    }
 
+    private double pathDistance(List<NodeData> nodes){
+        // Allows me to calculate path distance while saving the result of shortestPath for tsp
+        if (nodes.isEmpty()) return -1;
+        double size = nodes.get(0).getWeight();
+        for(int i=0; i < nodes.size() - 1; i ++){
+            size += graph.getEdge(nodes.get(i).getKey(), nodes.get(i + 1).getKey()).getWeight() +
+                    nodes.get(i+1).getWeight();
+        }
         return size;
     }
 
@@ -156,6 +160,8 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
     }
 
     private HashMap<Integer, Integer> shortestPathPointer(int src, int dest) {
+        // Warning: This function is set before reversing order!
+        // I created this function so I could calculate shortestPathDistance without actually creating new list and iterating moreover of required.
         double weight;
         NodeData nData = graph.getNode(src);
         // I need to save keys, weights & previous as I don't want to edit the graph.
@@ -183,7 +189,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
                 EdgeData edgs = it.next();
                 NodeData n = graph.getNode(edgs.getDest());
                 weight = weights.get(nData.getKey()) + edgs.getWeight(); // nData is in weights as we always adding it while adding to frontier.
-                if (explored.contains(n.getKey())) {
+                if (!explored.contains(n.getKey())) {
                     if (weight < n.getWeight()) {
                         weights.put(n.getKey(), weight);
                         previous.put(n.getKey(), nData.getKey());
@@ -216,6 +222,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
             v = prev.get(v);
         }
         nodes.add(graph.getNode(v));
+        Collections.reverse(nodes);
         return nodes;
     }
 
@@ -250,7 +257,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         });
         // After we calculated the distances find the minimum one, I couldn't get it inside the lambda expression,
         // Seems like this is disallowed in java, could save some iterations...
-        for(int k: nDistances.keySet()){
+        for (int k : nDistances.keySet()) {
             if (nDistances.get(k) < nDistances.get(minimum))
                 minimum = k;
         }
@@ -267,7 +274,59 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
      */
     @Override
     public List<NodeData> tsp(List<NodeData> cities) {
-        return null;
+        // Implementing TSP by Nearest Neighbor algorithm, which is O(n^2).
+        // I chose this algorithm because it is the best among algorithms compared at:
+        // http://160592857366.free.fr/joe/ebooks/ShareData/Heuristics%20for%20the%20Traveling%20Salesman%20Problem%20By%20Christian%20Nillson.pdf
+
+        if (cities.size() == 0) return null;
+
+        HashMap<Integer, Double> distancesToPoint; // <Key: Distance>
+        HashMap<Integer, List<NodeData>> pathToPoint; // <Key: Path>
+        List<NodeData> nodePath; // temporary node paths
+        ArrayList<NodeData> path = new ArrayList<>(); // final Path
+
+        NodeData node = cities.get(randomNum(0, cities.size() - 1));
+        cities.remove(node); // mark as visited.
+
+        while (cities.size() != 0) {
+            distancesToPoint = new HashMap<>(); // <Key: Distance>
+            pathToPoint = new HashMap<>(); // <Key: Path>
+            for (NodeData next : cities) {
+                nodePath = shortestPath(node.getKey(), next.getKey());
+                if (cities.size() == 1)
+                    cities.remove(node); // If we are in the last node it doesn't mather if we found a way or not, we have to remove it
+                if (nodePath != null) {
+                    distancesToPoint.put(next.getKey(), pathDistance(nodePath));
+                    pathToPoint.put(next.getKey(), nodePath);
+                }
+            }
+            int key = getMinKey(distancesToPoint, node);
+            if (key == node.getKey() && pathToPoint.isEmpty()) // There is no other way to go.
+                cities.clear(); // This will exit the loop and return path
+            else {
+                path.addAll(pathToPoint.get(key));
+                cities.removeAll(pathToPoint.get(key)); // We remove all cities we've visited from path.
+            }
+            node = graph.getNode(key);
+        }
+        return path;
+
+    }
+    private int getMinKey(HashMap<Integer, Double> distancesToPoint, NodeData node){
+        // Return minimum key or default if not valid
+        double minimum = Double.MAX_VALUE;
+        int key = node.getKey();
+        for(int k: distancesToPoint.keySet()){
+            if (distancesToPoint.get(k) <= minimum){
+                minimum = distancesToPoint.get(k);
+                key = k;
+            }
+        }
+        return key;
+    }
+    private int randomNum(int minimum, int maximum){
+        Random rand = new Random();
+        return minimum + rand.nextInt((maximum - minimum) + 1);
     }
 
     /**
@@ -282,8 +341,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         File f = new File(file);
         try {
             if ((f.exists() || f.createNewFile()) && f.canWrite()) {
-                Gson gson = new Gson();
-                gson.toJson(graph, new FileWriter(f));
+                GraphJsonParser.save(new FileWriter(f), graph);
                 return true;
             } else
                 return false;
@@ -306,8 +364,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         File f = new File(file);
         try {
             if (f.exists()) {
-                Gson gson = new Gson();
-                this.graph = gson.fromJson(new FileReader(f), DirectedWeightedGraph.class);
+                this.graph = GraphJsonParser.load(new FileReader(f));
                 return true;
             }
             return false;

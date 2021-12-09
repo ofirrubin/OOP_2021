@@ -7,10 +7,10 @@ class Edge implements EdgeData{
     int src, dest, tag;
     double weight;
     String info;
-    public Edge(int src, int dest, double weight){
+    public Edge(int src, int dest, double w){
         this.src = src;
         this.dest = dest;
-        this.weight = weight;
+        this.weight = w;
         this.tag = 0;
         this.info = "";
     }

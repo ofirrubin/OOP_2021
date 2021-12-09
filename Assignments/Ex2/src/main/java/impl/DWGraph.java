@@ -76,6 +76,8 @@ class DWGraph implements DirectedWeightedGraph{
     @Override
     public void connect(int src, int dest, double w) {
         // Assuming src and dest is in the graph.
+        if (!adjs.containsKey(src))
+            adjs.put(src, new HashMap<>());
         if (adjs.get(src).put(src + ";" + dest, new Edge(src, dest, 0, w, src + " -> " + dest)) != null) {
             links.get(dest).add(src); // Add link to the dest node.
             nAdjs++;

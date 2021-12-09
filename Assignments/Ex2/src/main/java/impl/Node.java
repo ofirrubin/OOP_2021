@@ -11,6 +11,14 @@ class Node implements NodeData{
     int tag;
     GeoLocation g;
 
+    public Node(int key, GeoLocation g){
+        this.key = key;
+        this.g = g;
+
+        this.weight = 0;
+        this.info = this.key + " at {" + this.g.x() + ", " + this.g.y() + ", " + this.g.z() + "} weights: " + this.weight;
+        this.tag = 0;
+    }
     public Node(int key, double weight, String info, int tag, GeoLocation g){
         this.key = key;
         this.weight = weight;

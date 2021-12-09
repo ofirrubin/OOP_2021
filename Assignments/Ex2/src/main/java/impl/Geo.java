@@ -3,8 +3,8 @@ package impl;
 import api.GeoLocation;
 
 class Geo implements GeoLocation {
-    int x, y, z;
-    public Geo(int x, int y, int z){
+    double x, y, z;
+    public Geo(double x, double y, double z){
         this.x = x;
         this.y = y;
         this.z = z;

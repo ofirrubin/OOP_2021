@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Uploaded">
-      <change beforePath="$PROJECT_DIR$/src/main/java/api/NodeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/NodeData.java" afterDir="false" />
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Fixed some issues in GSON">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/impl/GraphJsonParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Edge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Geo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Geo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +49,20 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Ex2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -55,7 +76,9 @@
       <workItem from="1638784072799" duration="2135000" />
       <workItem from="1638809930059" duration="5892000" />
       <workItem from="1638869577877" duration="1748000" />
-      <workItem from="1638888586165" duration="11441000" />
+      <workItem from="1638888586165" duration="11524000" />
+      <workItem from="1638957456286" duration="6276000" />
+      <workItem from="1638967912711" duration="26757000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -64,7 +87,28 @@
       <option name="project" value="LOCAL" />
       <updated>1638916678546</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Uploaded">
+      <created>1638916742138</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1638916742138</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Created isConnected - Using DFS">
+      <created>1638965249293</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1638965249293</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Created center">
+      <created>1638970352613</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1638970352613</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -84,6 +128,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Uploaded" />
-    <option name="LAST_COMMIT_MESSAGE" value="Uploaded" />
+    <MESSAGE value="Created isConnected - Using DFS" />
+    <MESSAGE value="Created center" />
+    <MESSAGE value="Fixed some issues in GSON" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some issues in GSON" />
   </component>
 </project>
