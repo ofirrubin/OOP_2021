@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="* Created JSONParser&#10;* Updated implementations constructors&#10;* Fixed shortestPath inverse selection&#10;* Removed deprecated functions.&#10;* Created Main for internal testing&#10;Some cleanups is required.">
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Created Testers files">
+      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/DWGraphAlgoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/DWGraphTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/EdgeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/GeoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/NodeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Edge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Geo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Geo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -42,9 +51,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="tests" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.GeoTest.equals">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Ex2" />
@@ -52,8 +71,42 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GeoTest.distance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ex2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.GeoTest" />
+      <option name="METHOD_NAME" value="distance" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeoTest.equals" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ex2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.GeoTest" />
+      <option name="METHOD_NAME" value="equals" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GeoTest.equals" />
+        <item itemvalue="JUnit.GeoTest.distance" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -73,7 +126,8 @@
       <workItem from="1638869577877" duration="1748000" />
       <workItem from="1638888586165" duration="11524000" />
       <workItem from="1638957456286" duration="6276000" />
-      <workItem from="1638967912711" duration="29290000" />
+      <workItem from="1638967912711" duration="31424000" />
+      <workItem from="1639040880368" duration="21000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -110,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639034180159</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="* Created JSONParser&#10;* Updated implementations constructors&#10;* Fixed shortestPath inverse selection&#10;* Removed deprecated functions.&#10;* Created Main for internal testing&#10;Some cleanups is required.">
+      <created>1639036867979</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1639036867979</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +196,7 @@
     <MESSAGE value="Fixed some issues in GSON" />
     <MESSAGE value="* Created JSONParser&#10;* Updated implementations constructors&#10;* Fixed shortestPath inverse selection&#10;* Removed deprecated functions.&#10;&#10;Some cleanups is required." />
     <MESSAGE value="* Created JSONParser&#10;* Updated implementations constructors&#10;* Fixed shortestPath inverse selection&#10;* Removed deprecated functions.&#10;* Created Main for internal testing&#10;Some cleanups is required." />
-    <option name="LAST_COMMIT_MESSAGE" value="* Created JSONParser&#10;* Updated implementations constructors&#10;* Fixed shortestPath inverse selection&#10;* Removed deprecated functions.&#10;* Created Main for internal testing&#10;Some cleanups is required." />
+    <MESSAGE value="Created Testers files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Testers files" />
   </component>
 </project>

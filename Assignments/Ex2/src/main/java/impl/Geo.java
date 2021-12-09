@@ -2,12 +2,20 @@ package impl;
 
 import api.GeoLocation;
 
-class Geo implements GeoLocation {
+public class Geo implements GeoLocation {
     double x, y, z;
     public Geo(double x, double y, double z){
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Geo geo = (Geo) o;
+        return Double.compare(geo.x, x) == 0 && Double.compare(geo.y, y) == 0 && Double.compare(geo.z, z) == 0;
     }
 
     @Override

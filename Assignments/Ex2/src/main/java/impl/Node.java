@@ -3,7 +3,7 @@ package impl;
 import api.GeoLocation;
 import api.NodeData;
 
-class Node implements NodeData{
+public class Node implements NodeData{
 
     int key;
     double weight;
@@ -127,4 +127,5 @@ class Node implements NodeData{
     public void setTag(int t) {
         tag = t;
     }
+
 }

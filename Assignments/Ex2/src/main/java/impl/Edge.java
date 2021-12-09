@@ -2,7 +2,7 @@ package impl;
 
 import api.EdgeData;
 
-class Edge implements EdgeData{
+public class Edge implements EdgeData{
 
     int src, dest, tag;
     double weight;

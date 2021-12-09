@@ -6,7 +6,7 @@ import api.NodeData;
 
 import java.util.*;
 
-class DWGraph implements DirectedWeightedGraph{
+public class DWGraph implements DirectedWeightedGraph{
 
     HashMap<Integer, HashMap<String, EdgeData>> adjs; // Each Node presented by its ID contains HashMap of <EdgeData.src +";" + EdgeData.dest>, EdgeData that gets from the node.
     HashMap<Integer, NodeData> nodes;
