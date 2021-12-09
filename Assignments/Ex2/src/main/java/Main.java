@@ -1,3 +1,4 @@
+import api.DirectedWeightedGraph;
 import api.NodeData;
 import impl.DWGraphAlgo;
 
@@ -20,7 +21,15 @@ public class Main {
                     (algo.getGraph().getEdge(path.get(i).getKey(), path.get(i+1).getKey()).getWeight() +
                     path.get(i).getWeight() + path.get(i+1).getWeight()));
         }
-        for(NodeData n: algo.tsp(visitAt))
-            System.out.println(n.getInfo());
+        path = algo.tsp(visitAt);
+        DirectedWeightedGraph graph = algo.getGraph();
+        System.out.println("\n\n\n");
+        System.out.println(algo.isConnected());
+
+        for (int i = 0; i < path.size() -1; i++) {
+            System.out.println(path.get(i).getInfo());
+            System.out.println("Next stop at: " + path.get(i+1).getInfo() + " > Edge: " +
+                    graph.getEdge(path.get(i).getKey(), path.get(i+1).getKey()).getInfo());
+        }
     }
 }

@@ -62,7 +62,6 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
     public boolean isConnected() {   // DFS based is connected. We will check if a graph is connected by going through the graph from a selected node and using a checklist
         // we will mark each node as if visited, Then we will go through visited list of each node and check if any node haven't been visited,
         // If so, the graph is not connected. Because this graph is directed - we have to check if we can go through the opposite way -> from each node to the selected node.
-
         if (graph == null) return false;
         HashMap<Integer, Boolean> visited = new HashMap<>();
         Iterator<NodeData> nIter = graph.nodeIter();
@@ -101,7 +100,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
     }
 
     private static void DFS(DirectedWeightedGraph graph, NodeData startingAt, HashMap<Integer, Boolean> visited) {
-        visited.put(startingAt.getKey(), false);
+        visited.put(startingAt.getKey(), true);
         for (Iterator<EdgeData> it = graph.edgeIter(startingAt.getKey()); it.hasNext(); ) {
             int key = it.next().getDest();
             if (!visited.get(key))
@@ -160,47 +159,40 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
     }
 
     private HashMap<Integer, Integer> shortestPathPointer(int src, int dest) {
-        // Warning: This function is set before reversing order!
-        // I created this function so I could calculate shortestPathDistance without actually creating new list and iterating moreover of required.
-        double weight;
-        NodeData nData = graph.getNode(src);
+        NodeData[] nData = {graph.getNode(src)}; // Using Wrapper to use in forEach.
         // I need to save keys, weights & previous as I don't want to edit the graph.
         HashMap<Integer, Double> weights = new HashMap<>();
         HashMap<Integer, Integer> previous = new HashMap<>();
         HashSet<Integer> explored = new HashSet<>();
-
-
         PriorityQueue<NodeData> frontier = new PriorityQueue<>((o1, o2) -> {
             if (o1.getWeight() == o2.getWeight()) return 0;
             return o1.getWeight() > o2.getWeight() ? 1 : -1;
         });
 
-        weights.put(nData.getKey(), 0.0);
-        frontier.add(nData);
-
+        weights.put(src, 0.0); // weight of nData[0]
+        frontier.add(nData[0]);
         while (!frontier.isEmpty()) {
-            nData = frontier.poll();
-            if (nData.getKey() == dest) {
+            nData[0] = frontier.poll();
+            if (nData[0].getKey() == dest)
                 return previous;
-            }
 
-            explored.add(nData.getKey());
-            for (Iterator<EdgeData> it = graph.edgeIter(nData.getKey()); it.hasNext(); ) {
-                EdgeData edgs = it.next();
+            explored.add(nData[0].getKey());
+           graph.edgeIter(nData[0].getKey()).forEachRemaining(edgs ->{
                 NodeData n = graph.getNode(edgs.getDest());
-                weight = weights.get(nData.getKey()) + edgs.getWeight(); // nData is in weights as we always adding it while adding to frontier.
+                int nDataKey = nData[0].getKey();
+                double weight = weights.get(nDataKey) + edgs.getWeight(); // nData is in weights as we always adding it while adding to frontier.
                 if (!explored.contains(n.getKey())) {
                     if (weight < n.getWeight()) {
                         weights.put(n.getKey(), weight);
-                        previous.put(n.getKey(), nData.getKey());
+                        previous.put(n.getKey(), nDataKey);
                         frontier.add(n);
                     } else {
                         weights.put(n.getKey(), weight);
                         frontier.add(n);
-                        previous.put(n.getKey(), nData.getKey());
+                        previous.put(n.getKey(), nDataKey);
                     }
                 }
-            }
+            });
         }
         return null;
     }
