@@ -52,7 +52,8 @@ public class Ex2 {
         String path = String.join(" ", args);
         File f = new File(path);
         if (!f.exists())
-
-        runGUI("/Users/ofirrubin/OOP_2021/Assignments/Ex2/data/G1.json");
+            System.out.println("File not found");
+        else
+            runGUI(f.toString());
     }
 }

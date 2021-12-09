@@ -9,12 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Created Simple GUI without any graph yet.">
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Updated JAR for the current version with UI">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/GraphJsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/GraphJsonParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Ex2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Ex2.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +50,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="607" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="424" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
@@ -61,6 +60,9 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Ex2GUI" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -72,6 +74,7 @@
     <configuration name="Ex2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Ex2" />
       <module name="Ex2" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/data/G2.json" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -137,6 +140,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Ex2" />
+      <item itemvalue="Application.Ex2UI" />
+      <item itemvalue="JUnit.DWGraphAlgoTest.center" />
+      <item itemvalue="JUnit.DWGraphAlgoTest.load" />
+      <item itemvalue="JUnit.DWGraphAlgoTest.shortestPathDist" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Ex2" />
@@ -163,7 +173,7 @@
       <workItem from="1638888586165" duration="11524000" />
       <workItem from="1638957456286" duration="6276000" />
       <workItem from="1638967912711" duration="31424000" />
-      <workItem from="1639040880368" duration="15608000" />
+      <workItem from="1639040880368" duration="30574000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -228,7 +238,21 @@
       <option name="project" value="LOCAL" />
       <updated>1639066055729</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Catched some possible exceptions,&#10;Added file chooser for openning new files.">
+      <created>1639067598234</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1639067598234</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Updated JAR for the current version with UI">
+      <created>1639067712348</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1639067712348</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,7 +281,9 @@
     <MESSAGE value="Made classes public for testers use" />
     <MESSAGE value="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground." />
     <MESSAGE value="Created Simple GUI without any graph yet." />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Simple GUI without any graph yet." />
+    <MESSAGE value="Catched some possible exceptions,&#10;Added file chooser for openning new files." />
+    <MESSAGE value="Updated JAR for the current version with UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated JAR for the current version with UI" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
