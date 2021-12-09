@@ -4,8 +4,11 @@ import api.DirectedWeightedGraphAlgorithms;
 import api.NodeData;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,9 +59,14 @@ public class Ex2UI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loadGraphButton){
+            JFileChooser fC = new JFileChooser();
 
-            JOptionPane.showMessageDialog(null, "Graph loaded");
-            setButtonsVisibility();
+            //fC.setAcceptAllFileFilterUsed(false);
+            fC.setFileFilter(new FileNameExtensionFilter("json", "json"));
+            if (fC.showOpenDialog(this) == 0 && !algo.load(fC.getSelectedFile().toString()))
+                JOptionPane.showMessageDialog(null, "Couldn't load the graph");
+            else
+                JOptionPane.showMessageDialog(null, "Graph loaded!");
         }
         else if (e.getSource() == isConnectedButton) {
             if (algo.isConnected())

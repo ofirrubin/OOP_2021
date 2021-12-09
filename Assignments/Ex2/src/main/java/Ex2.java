@@ -4,6 +4,7 @@ import api.DirectedWeightedGraphAlgorithms;
 import impl.DWGraphAlgo;
 
 import javax.swing.*;
+import java.io.File;
 
 /**
  * This class is the main class for Ex2 - your implementation will be tested using this class.
@@ -48,6 +49,10 @@ public class Ex2 {
     }
 
     public static void main(String[] args){
+        String path = String.join(" ", args);
+        File f = new File(path);
+        if (!f.exists())
+
         runGUI("/Users/ofirrubin/OOP_2021/Assignments/Ex2/data/G1.json");
     }
 }

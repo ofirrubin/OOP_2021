@@ -359,7 +359,9 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         File f = new File(file);
         try {
             if (f.exists()) {
-                this.graph = GraphJsonParser.load(new FileReader(f));
+                DirectedWeightedGraph g = GraphJsonParser.load(new FileReader(f));
+                if (g == null) return false;
+                this.graph = g;
                 return true;
             }
             return false;

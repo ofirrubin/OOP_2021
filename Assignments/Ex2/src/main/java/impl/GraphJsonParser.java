@@ -19,15 +19,19 @@ public class GraphJsonParser
         Gson gson = new Gson();
         DWGraph graph = new DWGraph();
         Map<String, ArrayList<LinkedTreeMap<String, Object>>> g = new HashMap<>();
-
+        try {
         g = gson.fromJson(f, g.getClass());
-        g.get("Nodes").forEach(n -> graph.addNode(new Node(((Double) n.get("id")).intValue(),
-                getLocation((String) n.get("pos")))));
-        g.get("Edges").forEach(e -> graph.connect(((Double) e.get("src")).intValue(),
-                ((Double) e.get("dest")).intValue(),
-                (Double) e.get("w")));
+            g.get("Nodes").forEach(n -> graph.addNode(new Node(((Double) n.get("id")).intValue(),
+                    getLocation((String) n.get("pos")))));
+            g.get("Edges").forEach(e -> graph.connect(((Double) e.get("src")).intValue(),
+                    ((Double) e.get("dest")).intValue(),
+                    (Double) e.get("w")));
 
-        return graph;
+            return graph;
+        }
+        catch(Exception e){
+            return null;
+        }
     }
 
     public static void save(FileWriter f, DirectedWeightedGraph graph) throws IOException {

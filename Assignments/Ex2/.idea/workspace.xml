@@ -9,11 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Created Simple GUI without any graph yet.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/GraphJsonParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/GraphJsonParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Ex2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Ex2.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -162,7 +163,7 @@
       <workItem from="1638888586165" duration="11524000" />
       <workItem from="1638957456286" duration="6276000" />
       <workItem from="1638967912711" duration="31424000" />
-      <workItem from="1639040880368" duration="14085000" />
+      <workItem from="1639040880368" duration="15608000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -220,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639048918134</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Created Simple GUI without any graph yet.">
+      <created>1639066055729</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1639066055729</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,18 +256,10 @@
     <MESSAGE value="Created Testers files" />
     <MESSAGE value="Made classes public for testers use" />
     <MESSAGE value="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground." />
+    <MESSAGE value="Created Simple GUI without any graph yet." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Simple GUI without any graph yet." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Ex2.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="key" />
