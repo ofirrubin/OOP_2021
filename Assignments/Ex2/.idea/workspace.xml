@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Created Testers files">
-      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/DWGraphAlgoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/DWGraphTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/EdgeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/GeoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/java/tests/NodeTest.java" afterDir="false" />
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MyProgramTesting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/impl/Edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Edge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Geo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Geo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/java/tests/DWGraphAlgoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/java/tests/DWGraphAlgoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/java/tests/DWGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/java/tests/DWGraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/java/tests/EdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/java/tests/EdgeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/java/tests/NodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/java/tests/NodeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +52,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -63,15 +65,15 @@
       <recent name="tests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GeoTest.equals">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+  <component name="RunManager" selected="Application.Ex2">
+    <configuration name="Ex2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Ex2" />
       <module name="Ex2" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeoTest.distance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DWGraphAlgoTest.center" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ex2" />
       <extension name="coverage">
         <pattern>
@@ -80,14 +82,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.GeoTest" />
-      <option name="METHOD_NAME" value="distance" />
+      <option name="MAIN_CLASS_NAME" value="tests.DWGraphAlgoTest" />
+      <option name="METHOD_NAME" value="center" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeoTest.equals" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DWGraphAlgoTest.load" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ex2" />
       <extension name="coverage">
         <pattern>
@@ -96,8 +98,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.GeoTest" />
-      <option name="METHOD_NAME" value="equals" />
+      <option name="MAIN_CLASS_NAME" value="tests.DWGraphAlgoTest" />
+      <option name="METHOD_NAME" value="load" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DWGraphAlgoTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ex2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.DWGraphAlgoTest" />
+      <option name="METHOD_NAME" value="save" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DWGraphAlgoTest.shortestPathDist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ex2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.DWGraphAlgoTest" />
+      <option name="METHOD_NAME" value="shortestPathDist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -105,9 +139,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GeoTest.equals" />
-        <item itemvalue="JUnit.GeoTest.distance" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Ex2" />
+        <item itemvalue="JUnit.DWGraphAlgoTest.center" />
+        <item itemvalue="JUnit.DWGraphAlgoTest.shortestPathDist" />
+        <item itemvalue="JUnit.DWGraphAlgoTest.load" />
+        <item itemvalue="JUnit.DWGraphAlgoTest.save" />
       </list>
     </recent_temporary>
   </component>
@@ -127,7 +163,7 @@
       <workItem from="1638888586165" duration="11524000" />
       <workItem from="1638957456286" duration="6276000" />
       <workItem from="1638967912711" duration="31424000" />
-      <workItem from="1639040880368" duration="21000" />
+      <workItem from="1639040880368" duration="7003000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -171,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639036867979</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Made classes public for testers use">
+      <created>1639040953902</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1639040953902</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,6 +240,15 @@
     <MESSAGE value="* Created JSONParser&#10;* Updated implementations constructors&#10;* Fixed shortestPath inverse selection&#10;* Removed deprecated functions.&#10;&#10;Some cleanups is required." />
     <MESSAGE value="* Created JSONParser&#10;* Updated implementations constructors&#10;* Fixed shortestPath inverse selection&#10;* Removed deprecated functions.&#10;* Created Main for internal testing&#10;Some cleanups is required." />
     <MESSAGE value="Created Testers files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Testers files" />
+    <MESSAGE value="Made classes public for testers use" />
+    <MESSAGE value="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground." />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="key" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

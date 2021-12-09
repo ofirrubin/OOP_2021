@@ -15,8 +15,10 @@ public class DWGraph implements DirectedWeightedGraph{
 
     public DWGraph(){
         adjs = new HashMap<>();
-        nodes = new HashMap<>();
+        links = new HashMap<>();
         nAdjs = 0;
+        nodes = new HashMap<>();
+        changes = 0;
     }
 
     public DWGraph(DWGraph g){
@@ -58,11 +60,11 @@ public class DWGraph implements DirectedWeightedGraph{
      */
     @Override
     public void addNode(NodeData n) {
-        if (nodes.put(n.getKey(), n) != null) {
+        if (nodes.put(n.getKey(), n) == null) {
             links.put(n.getKey(), new TreeSet<>()); // If this is a new node, there are no links to it.
             adjs.put(n.getKey(), new HashMap<>()); // New node is not connected to anything
-            changes++;
         }
+        changes++;
     }
 
     /**
@@ -78,7 +80,9 @@ public class DWGraph implements DirectedWeightedGraph{
         // Assuming src and dest is in the graph.
         if (!adjs.containsKey(src))
             adjs.put(src, new HashMap<>());
-        if (adjs.get(src).put(src + ";" + dest, new Edge(src, dest, 0, w, src + " -> " + dest)) != null) {
+        if (!links.containsKey(dest))
+            links.put(dest, new TreeSet<>());
+        if (adjs.get(src).put(src + ";" + dest, new Edge(src, dest, 0, w, src + " -> " + dest)) == null) {
             links.get(dest).add(src); // Add link to the dest node.
             nAdjs++;
             changes ++;
@@ -159,8 +163,12 @@ public class DWGraph implements DirectedWeightedGraph{
     @Override
     public EdgeData removeEdge(int src, int dest) {
         EdgeData d = adjs.get(src).remove(src + ";" + dest);
-        if (d != null)
-            changes ++;
+        if (links.get(dest) != null)
+            links.get(dest).remove(src);
+        if (d != null) {
+            changes++;
+            nAdjs --;
+        }
         return d;
     }
 

@@ -5,7 +5,7 @@ import impl.DWGraphAlgo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class MyProgramTesting {
     public static void main(String[] args){
         DWGraphAlgo algo = new DWGraphAlgo();
         algo.load("/Users/ofirrubin/OOP_2021/Assignments/Ex2/data/G1.json");

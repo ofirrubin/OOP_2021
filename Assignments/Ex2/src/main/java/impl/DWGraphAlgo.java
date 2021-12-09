@@ -241,10 +241,13 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         graph.nodeIter().forEachRemaining(current -> {
             nDistances.put(current.getKey(), 0.0);
             graph.nodeIter().forEachRemaining(node -> {
-                if (node.getKey() != current.getKey())
-                    nDistances.put(node.getKey(),
-                            nDistances.get(node.getKey()) + shortestPathDist(current.getKey(), node.getKey()));
-
+                if (node.getKey() != current.getKey()) {
+                    int key = node.getKey();
+                    double shortestPathDistance = shortestPathDist(current.getKey(), node.getKey());
+                    if (!nDistances.containsKey(key))
+                        nDistances.put(key, 0.0);
+                    nDistances.put(key, nDistances.get(key) + shortestPathDistance);
+                }
             });
         });
         // After we calculated the distances find the minimum one, I couldn't get it inside the lambda expression,

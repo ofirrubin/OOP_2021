@@ -2,6 +2,8 @@ package impl;
 
 import api.EdgeData;
 
+import java.util.Objects;
+
 public class Edge implements EdgeData{
 
     int src, dest, tag;
@@ -90,4 +92,14 @@ public class Edge implements EdgeData{
     public void setTag(int t) {
         tag = t;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Edge edge = (Edge) o;
+        return src == edge.src && dest == edge.dest;
+    }
+
 }
