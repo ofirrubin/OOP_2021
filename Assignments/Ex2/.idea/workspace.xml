@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Ex2:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MyProgramTesting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/Edge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/Edge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/java/tests/DWGraphAlgoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/java/tests/DWGraphAlgoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/java/tests/DWGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/java/tests/DWGraphTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/java/tests/EdgeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/java/tests/EdgeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/java/tests/NodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/java/tests/NodeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Ex2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Ex2.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -49,6 +49,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="607" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
@@ -69,6 +71,19 @@
     <configuration name="Ex2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Ex2" />
       <module name="Ex2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Ex2UI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Ex2GUI.Ex2UI" />
+      <module name="Ex2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Ex2GUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -105,22 +120,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DWGraphAlgoTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ex2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.DWGraphAlgoTest" />
-      <option name="METHOD_NAME" value="save" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DWGraphAlgoTest.shortestPathDist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ex2" />
       <extension name="coverage">
@@ -140,10 +139,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Ex2" />
+        <item itemvalue="Application.Ex2UI" />
         <item itemvalue="JUnit.DWGraphAlgoTest.center" />
         <item itemvalue="JUnit.DWGraphAlgoTest.shortestPathDist" />
         <item itemvalue="JUnit.DWGraphAlgoTest.load" />
-        <item itemvalue="JUnit.DWGraphAlgoTest.save" />
       </list>
     </recent_temporary>
   </component>
@@ -163,7 +162,7 @@
       <workItem from="1638888586165" duration="11524000" />
       <workItem from="1638957456286" duration="6276000" />
       <workItem from="1638967912711" duration="31424000" />
-      <workItem from="1639040880368" duration="7003000" />
+      <workItem from="1639040880368" duration="14085000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -214,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639040953902</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground.">
+      <created>1639048918134</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1639048918134</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +251,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="Added tests,&#10;=&gt; TSP tester is required and will be done later, I have to do GUI as I don't have time.&#10;now creating GUI ground." />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Ex2.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="key" />

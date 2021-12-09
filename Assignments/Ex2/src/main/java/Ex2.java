@@ -1,6 +1,9 @@
+import Ex2GUI.Ex2UI;
 import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
 import impl.DWGraphAlgo;
+
+import javax.swing.*;
 
 /**
  * This class is the main class for Ex2 - your implementation will be tested using this class.
@@ -26,8 +29,8 @@ public class Ex2 {
     public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file) {
         DirectedWeightedGraphAlgorithms ans = null;
         // ****** Add your code here ******
-        DirectedWeightedGraphAlgorithms gAlg = new DWGraphAlgo();
-        gAlg.load(json_file);
+        ans = new DWGraphAlgo();
+        ans.load(json_file);
         // ********************************
         return ans;
     }
@@ -39,11 +42,12 @@ public class Ex2 {
     public static void runGUI(String json_file) {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
         // ****** Add your code here ******
-
+        JFrame gui = new Ex2UI("Ex2 - Ofir Rubin", alg);
+        gui.setVisible(true);
         // ********************************
     }
 
     public static void main(String[] args){
-
+        runGUI("/Users/ofirrubin/OOP_2021/Assignments/Ex2/data/G1.json");
     }
 }
