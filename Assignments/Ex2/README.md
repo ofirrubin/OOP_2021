@@ -14,3 +14,10 @@ As for now the program have few functions:
 * Find Graph center
 #### Usage in graph mode:
 While using in graph mode (in show graph mode, TSP or shortest path) you may click on a node to see it's information and linked adjs.
+
+# Analysis:
+
+|  Graph Size   | Graph Load Time | Shortest Path Time | Shortest Path Distance Time |  TSP Time   |
+| ------------- | --------------- | ------------------ | --------------------------- | ----------- |
+|               |                 |                    |                             |             |
+|               |                 |                    |                             |             |
