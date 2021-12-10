@@ -9,9 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Updated TSP GUI,&#10;I want to add Checklist for tsp cities selection">
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Updated some comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +170,7 @@
       <workItem from="1638888586165" duration="11524000" />
       <workItem from="1638957456286" duration="6276000" />
       <workItem from="1638967912711" duration="31424000" />
-      <workItem from="1639040880368" duration="35855000" />
+      <workItem from="1639040880368" duration="36612000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -263,7 +263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639096168808</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Updated some comments">
+      <created>1639096602832</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1639096602832</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +303,8 @@
     <MESSAGE value="Updated JAR for the current version with UI" />
     <MESSAGE value="Updated UI with graph, working on shortest path graph" />
     <MESSAGE value="Updated TSP GUI,&#10;I want to add Checklist for tsp cities selection" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated TSP GUI,&#10;I want to add Checklist for tsp cities selection" />
+    <MESSAGE value="Updated some comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated some comments" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

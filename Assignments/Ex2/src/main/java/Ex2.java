@@ -53,7 +53,7 @@ public class Ex2 {
     public static void main(String[] args){
         String path = String.join(" ", args);
         File f = new File(path);
-        if (!f.exists())
+        if (!f.exists() && !"".equals(path))
             System.out.println("File not found");
         else
             runGUI(f.toString());
