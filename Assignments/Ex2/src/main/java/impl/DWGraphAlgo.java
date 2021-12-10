@@ -157,7 +157,6 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         HashMap<Integer, Integer> previousList = shortestPathPointer(src, dest);
         return previousList == null ? null : buildPath(src, dest, previousList);
     }
-
     private HashMap<Integer, Integer> shortestPathPointer(int src, int dest) {
         NodeData[] nData = {graph.getNode(src)}; // Using Wrapper to use in forEach.
         // I need to save keys, weights & previous as I don't want to edit the graph.

@@ -1,20 +1,20 @@
 package Ex2GUI;
 
 import api.DirectedWeightedGraph;
-import api.EdgeData;
 import api.GeoLocation;
 import api.NodeData;
-import impl.Edge;
 import impl.Geo;
+import impl.Node;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-public class GraphUI extends JPanel {
+public class GraphUI extends JPanel implements MouseListener {
 
     DirectedWeightedGraph graph;
     int width;
@@ -30,6 +30,7 @@ public class GraphUI extends JPanel {
     final Color pColor = Color.RED;
     final Color sColor = Color.BLUE;
     ArrayList<NodeData> coloredNodes;
+    ArrayList<NodeData> nodes;
 
     public GraphUI(DirectedWeightedGraph g,
                    int rightPadding, int topPadding,int leftPadding, int bottomPadding,
@@ -40,8 +41,9 @@ public class GraphUI extends JPanel {
         this.rightPadding = rightPadding;
         this.topPadding = topPadding;
         this.height = height - bottomPadding - topPadding;
-
+        this.nodes = new ArrayList<>();
         setScale(g.nodeIter());
+        this.addMouseListener(this);
     }
 
     public static GraphUI initColored(DirectedWeightedGraph g,
@@ -87,11 +89,13 @@ public class GraphUI extends JPanel {
         radius = Math.min(width, height) / 80;
         graph.nodeIter().forEachRemaining(n -> {
             g.setColor(pColor);
+            GeoLocation geo =  getPositioned(n.getLocation());
             graph.edgeIter(n.getKey()).forEachRemaining(e -> {
-                drawEdge(g, getPositioned(n.getLocation()), getPositioned(graph.getNode(e.getDest()).getLocation()));
+                drawEdge(g, geo, getPositioned(graph.getNode(e.getDest()).getLocation()));
             });
             g.setColor(coloredNodes.contains(n) ? sColor : nodeColor); // Drawing the point over the edges.
             drawFilledCircle(g, getPositioned(n.getLocation()), radius);
+            nodes.add(new Node(n.getKey(), n.getWeight(), n.getInfo(), n.getTag(), geo));
         });
     }
 
@@ -112,5 +116,68 @@ public class GraphUI extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
+    }
+
+    /**
+     * Invoked when the mouse button has been clicked (pressed
+     * and released) on a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        for(NodeData n: nodes){
+            GeoLocation g = n.getLocation();
+            if (e.getX() >= g.x() - radius && e.getX() <= g.x() + radius
+                    &&  e.getY() >= g.y() - radius && e.getY() <= g.y() + radius) {
+                ArrayList<String> edges = new ArrayList<>();
+                graph.edgeIter(n.getKey()).forEachRemaining(edg -> edges.add(edg.getSrc() + " -> " + edg.getDest() +
+                        "; Weight: " + edg.getWeight()));
+                ListDialog dialog = new ListDialog(n.getKey() + " > Info: " + n.getInfo() + " -> Edges: ",
+                        new JList(edges.toArray()));
+                //dialog.setOnOk(e -> System.out.println("Chosen item: " + dialog.getSelectedItem()));
+                dialog.show();
+                return;
+            }
+        }
+    }
+
+    /**
+     * Invoked when a mouse button has been pressed on a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    /**
+     * Invoked when a mouse button has been released on a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    /**
+     * Invoked when the mouse enters a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    /**
+     * Invoked when the mouse exits a component.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

@@ -44,7 +44,9 @@ public class Ex2 {
         DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
         // ****** Add your code here ******
         JFrame gui = new Ex2UI("Ex2 - Ofir Rubin", alg);
+        gui.setLocationRelativeTo(null);
         gui.setVisible(true);
+        gui.pack();
         // ********************************
     }
 

@@ -1,14 +1,14 @@
 package Ex2GUI;
 
+import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
 import api.NodeData;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ex2UI extends JFrame implements ActionListener {
@@ -29,7 +29,7 @@ public class Ex2UI extends JFrame implements ActionListener {
     final int graphPadding = 10;
     final int graphBoxSize = 500;
 
-    public Ex2UI(String title, DirectedWeightedGraphAlgorithms algo){
+    public Ex2UI(String title, DirectedWeightedGraphAlgorithms algo) {
         super(title);
         this.algo = algo;
         graphicFrame = new JFrame();
@@ -44,27 +44,30 @@ public class Ex2UI extends JFrame implements ActionListener {
         this.pack();
 
     }
-    private void setButtonsVisibility(){
+
+    private void setButtonsVisibility() {
         boolean state = algo == null || algo.getGraph() == null;
-        for(JButton b: actionButtons)
+        for (JButton b : actionButtons)
             b.setVisible(!state);
         if (!state) // Override visibility for tsp by isConnected
             tspButton.setVisible(algo.isConnected());
         this.pack();
     }
 
-    private void addButtonListeners(){
+    private void addButtonListeners() {
         loadGraphButton.addActionListener(this);
-        for(JButton b: actionButtons)
+        for (JButton b : actionButtons)
             b.addActionListener(this);
     }
 
-    private void setGraphicFrame(JPanel g){
+    private void setGraphicFrame(JPanel g) {
         graphicFrame.getContentPane().removeAll(); // reset graphic frame
         graphicFrame.add(g);
+        graphicFrame.setLocationRelativeTo(null);
         graphicFrame.pack();
         graphicFrame.setVisible(true);
     }
+
     /**
      * Invoked when an action occurs.
      *
@@ -72,12 +75,7 @@ public class Ex2UI extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        GraphUI gui = GraphUI.initColored(algo.getGraph(),
-                graphPadding, graphPadding, graphPadding, graphPadding,
-                graphBoxSize, graphBoxSize, algo.shortestPath(0, 6));
-        setGraphicFrame(gui);
-
-        if (e.getSource() == loadGraphButton){
+        if (e.getSource() == loadGraphButton) {
             JFileChooser fC = new JFileChooser();
 
             //fC.setAcceptAllFileFilterUsed(false);
@@ -91,25 +89,46 @@ public class Ex2UI extends JFrame implements ActionListener {
                 setButtonsVisibility();
                 this.pack();
             }
-        }
-        else if (e.getSource() == isConnectedButton) {
+        } else if (e.getSource() == isConnectedButton) {
             if (algo.isConnected())
                 JOptionPane.showMessageDialog(null, "This graph is a connected graph.");
             else
                 JOptionPane.showMessageDialog(null, "This graph is not a connected graph.");
-        }
-        else if (e.getSource() == centerButton) {
+        } else if (e.getSource() == centerButton) {
             JOptionPane.showMessageDialog(null, "Graph Center Node Info\n" + algo.center().getInfo());
-        }
-        else if (e.getSource() == showGraphButton) {
+        } else if (e.getSource() == showGraphButton) {
             GraphUI g = new GraphUI(algo.getGraph(), // Graph
                     graphPadding, graphPadding, graphPadding, graphPadding, // Padding <Right, Top, Left, Bottom>
                     graphBoxSize, graphBoxSize); // Width, Height
             setGraphicFrame(g);
-        }
-        else if (e.getSource() == tspButton) {
-        }
-        else if (e.getSource() == shortestPathButton) {
+        } else if (e.getSource() == tspButton) {
+            // HashMap<String, NodeData> nodes = new HashMap<>();
+            // algo.getGraph().nodeIter().forEachRemaining(n -> nodes.put(n.getInfo(), n));
+            //ListDialog dialog = new ListDialog("Please select nodes:",
+            //        new JList(nodes.keySet().toArray()));
+            //dialog.setOnOk(d -> System.out.println("Chosen item: " + dialog.getSelectedItem()));
+            String o = JOptionPane.showInputDialog("Please enter cities keys with ',' as dividers");
+            String[] kS = o.split(",");
+            ArrayList<NodeData> nodes = new ArrayList<>();
+            DirectedWeightedGraph g = algo.getGraph();
+            NodeData node;
+
+            try {
+                for (String k : kS) {
+                    node = g.getNode(Integer.parseInt(k));
+                    if (node == null)
+                        throw new ClassNotFoundException();
+                    else
+                        nodes.add(node);
+                }
+            nodes = (ArrayList<NodeData>) algo.tsp(nodes);
+            showColoredPathGraph(nodes);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Keys must be integers >= 0");
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "One key or more were missing");
+            }
+        } else if (e.getSource() == shortestPathButton) {
             String uInput = JOptionPane.showInputDialog("Please enter the source node key: ");
             try {
                 if (uInput == null)
@@ -126,15 +145,23 @@ public class Ex2UI extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "No path from " + srcKey
                             + " to " + destKey);
                 else {
+                    showColoredPathGraph(path);
                     JOptionPane.showMessageDialog(null, "A path fround!\n" +
-                            "Distance: " + algo.shortestPathDist(srcKey, destKey) +"\n" +
-                            "Close this message to load the graph");
+                            "Distance: " + algo.shortestPathDist(srcKey, destKey) + "\n" +
+                            "Close this message to load the graph, It might be hidden behind the main window");
 
                 }
-            }
-            catch (NumberFormatException nfE){
+            } catch (NumberFormatException nfE) {
                 JOptionPane.showMessageDialog(null, "The key must be an integer >= 0");
             }
         }
     }
+
+    private void showColoredPathGraph(List<NodeData> path) {
+        GraphUI gui = GraphUI.initColored(algo.getGraph(),
+                graphPadding, graphPadding, graphPadding, graphPadding,
+                graphBoxSize, graphBoxSize, path);
+        setGraphicFrame(gui);
+    }
+
 }
