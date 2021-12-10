@@ -9,15 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Updated UI with graph, working on shortest path graph">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/ListDialog.java" afterDir="false" />
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Updated TSP GUI,&#10;I want to add Checklist for tsp cities selection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Ex2_jar/Ex2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Ex2_jar/Ex2.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Ex2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Ex2.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +170,7 @@
       <workItem from="1638888586165" duration="11524000" />
       <workItem from="1638957456286" duration="6276000" />
       <workItem from="1638967912711" duration="31424000" />
-      <workItem from="1639040880368" duration="35347000" />
+      <workItem from="1639040880368" duration="35855000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -262,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639091419198</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Updated TSP GUI,&#10;I want to add Checklist for tsp cities selection">
+      <created>1639096168808</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1639096168808</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +295,8 @@
     <MESSAGE value="Catched some possible exceptions,&#10;Added file chooser for openning new files." />
     <MESSAGE value="Updated JAR for the current version with UI" />
     <MESSAGE value="Updated UI with graph, working on shortest path graph" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated UI with graph, working on shortest path graph" />
+    <MESSAGE value="Updated TSP GUI,&#10;I want to add Checklist for tsp cities selection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated TSP GUI,&#10;I want to add Checklist for tsp cities selection" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

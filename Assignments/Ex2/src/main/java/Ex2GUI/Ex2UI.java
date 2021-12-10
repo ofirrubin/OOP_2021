@@ -26,8 +26,8 @@ public class Ex2UI extends JFrame implements ActionListener {
 
     private DirectedWeightedGraphAlgorithms algo;
     private JButton[] actionButtons;
-    final int graphPadding = 10;
-    final int graphBoxSize = 500;
+    final int graphPadding = 10; // All sides padding
+    final int graphBoxSize = 500; // Square sized graph
 
     public Ex2UI(String title, DirectedWeightedGraphAlgorithms algo) {
         super(title);
@@ -78,57 +78,58 @@ public class Ex2UI extends JFrame implements ActionListener {
         if (e.getSource() == loadGraphButton) {
             JFileChooser fC = new JFileChooser();
 
-            //fC.setAcceptAllFileFilterUsed(false);
+            //Allow Json file extension only
             fC.setFileFilter(new FileNameExtensionFilter("json", "json"));
-            if (fC.showOpenDialog(this) == 0 && !algo.load(fC.getSelectedFile().toString()))
+            if (fC.showOpenDialog(this) == 0 && !algo.load(fC.getSelectedFile().toString())) // Graph not loaded (File not found / Couldn't parse etc.)
                 JOptionPane.showMessageDialog(null,
                         "Couldn't load the graph, Nothing changed.");
             else {
-                if (fC.getSelectedFile() == null) return;
+                if (fC.getSelectedFile() == null) return; // If nothing updated return, otherwise update user & buttons.
                 JOptionPane.showMessageDialog(null, "Loaded new graph");
                 setButtonsVisibility();
                 this.pack();
             }
         } else if (e.getSource() == isConnectedButton) {
-            if (algo.isConnected())
+            if (algo.isConnected())  // Show isConnected state to the user.
                 JOptionPane.showMessageDialog(null, "This graph is a connected graph.");
             else
                 JOptionPane.showMessageDialog(null, "This graph is not a connected graph.");
-        } else if (e.getSource() == centerButton) {
+        } else if (e.getSource() == centerButton) { // Show the user the center point.
             JOptionPane.showMessageDialog(null, "Graph Center Node Info\n" + algo.center().getInfo());
         } else if (e.getSource() == showGraphButton) {
             GraphUI g = new GraphUI(algo.getGraph(), // Graph
                     graphPadding, graphPadding, graphPadding, graphPadding, // Padding <Right, Top, Left, Bottom>
                     graphBoxSize, graphBoxSize); // Width, Height
             setGraphicFrame(g);
-        } else if (e.getSource() == tspButton) {
+        } else if (e.getSource() == tspButton) { // Get TSP cities and find it, show in graph
             // HashMap<String, NodeData> nodes = new HashMap<>();
             // algo.getGraph().nodeIter().forEachRemaining(n -> nodes.put(n.getInfo(), n));
             //ListDialog dialog = new ListDialog("Please select nodes:",
             //        new JList(nodes.keySet().toArray()));
             //dialog.setOnOk(d -> System.out.println("Chosen item: " + dialog.getSelectedItem()));
             String o = JOptionPane.showInputDialog("Please enter cities keys with ',' as dividers");
-            String[] kS = o.split(",");
-            ArrayList<NodeData> nodes = new ArrayList<>();
+            String[] kS = o.split(","); // Split inputs
+            ArrayList<NodeData> nodes = new ArrayList<>(); // Nodes will be saved here
             DirectedWeightedGraph g = algo.getGraph();
             NodeData node;
 
             try {
-                for (String k : kS) {
+                for (String k : kS) { // Save parsed nodes
                     node = g.getNode(Integer.parseInt(k));
                     if (node == null)
-                        throw new ClassNotFoundException();
+                        throw new ClassNotFoundException(); // If input is invalid raise a message to the user, return.
                     else
                         nodes.add(node);
                 }
-            nodes = (ArrayList<NodeData>) algo.tsp(nodes);
-            showColoredPathGraph(nodes);
+            nodes = (ArrayList<NodeData>) algo.tsp(nodes); // Find tsp
+            showColoredPathGraph(nodes); // Show the tsp to the user.
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "Keys must be integers >= 0");
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "One key or more were missing");
             }
-        } else if (e.getSource() == shortestPathButton) {
+        } else if (e.getSource() == shortestPathButton) { // Get input from the user and find the shortest path -
+            // If there is path calculate the distance and show the path by colored graph.
             String uInput = JOptionPane.showInputDialog("Please enter the source node key: ");
             try {
                 if (uInput == null)
