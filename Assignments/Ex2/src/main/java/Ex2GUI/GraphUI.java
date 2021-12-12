@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,7 +33,7 @@ public class GraphUI extends JPanel implements MouseListener {
     double minX, minY;
     double xD, yD;
     double xS, yS;
-    int highestID = 0;
+    int highestID;
 
     final Color nodeColor = Color.BLACK;
     final Color pColor = Color.RED;
@@ -118,10 +119,12 @@ public class GraphUI extends JPanel implements MouseListener {
         graph.nodeIter().forEachRemaining(n -> {
             GeoLocation srcGeo =  getPositioned(n.getLocation());
             graph.edgeIter(n.getKey()).forEachRemaining(e -> {
-                g.setColor(pColor);
-                GeoLocation dstGeo = getPositioned(graph.getNode(e.getDest()).getLocation());
+                NodeData destNode = graph.getNode(e.getDest());
+                GeoLocation dstGeo = getPositioned(destNode.getLocation());
+                g.setColor(coloredNodes.contains(n) && coloredNodes.contains(destNode) ? sColor: pColor);
                 drawEdge(g, srcGeo, dstGeo);
                 //drawArrowHead(g, srcGeo, dstGeo);
+                //t3dfx(g, srcGeo, dstGeo);
             });
             g.setColor(coloredNodes.contains(n) ? sColor : nodeColor); // Drawing the point over the edges.
             drawFilledCircle(g, getPositioned(n.getLocation()), radius);
@@ -134,6 +137,45 @@ public class GraphUI extends JPanel implements MouseListener {
     }
     private void drawCircle(Graphics g, GeoLocation g1, int radius) {
         g.drawOval((int) g1.x() - radius, (int) g1.y() - radius, radius, radius);
+    }
+
+    private void t3dfx(Graphics g, GeoLocation start, GeoLocation end){
+
+        final double startx = start.x();
+        final double starty = start.x();
+
+        double arrowSize = 0.2;
+
+        g = (Graphics2D) g;
+        final double deltax = startx - end.x();
+        final double result;
+        if (deltax == 0.0d) {
+            result = Math.PI / 2;
+        }
+        else {
+            result = Math.atan((starty - end.y()) / deltax) + (startx < end.x() ? Math.PI : 0);
+        }
+
+        final double angle = result;
+
+        final double arrowAngle = Math.PI / 12.0d;
+
+        final double x1 = arrowSize * Math.cos(angle - arrowAngle);
+        final double y1 = arrowSize * Math.sin(angle - arrowAngle);
+        final double x2 = arrowSize * Math.cos(angle + arrowAngle);
+        final double y2 = arrowSize * Math.sin(angle + arrowAngle);
+
+        final double cx = (arrowSize / 2.0f) * Math.cos(angle);
+        final double cy = (arrowSize / 2.0f) * Math.sin(angle);
+
+        final GeneralPath polygon = new GeneralPath();
+        polygon.moveTo(end.x(), end.y());
+        polygon.lineTo(end.x() + x1, end.y() + y1);
+        polygon.lineTo(end.x() + x2, end.y() + y2);
+        polygon.closePath();
+        ((Graphics2D) g).fill(polygon);
+
+        g.drawLine((int) startx, (int) starty, (int) (end.x() + cx), (int) (end.y() + cy));
     }
 
     private void drawArrowHead(Graphics2D g, GeoLocation src, GeoLocation dest){

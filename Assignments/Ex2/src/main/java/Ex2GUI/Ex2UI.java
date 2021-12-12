@@ -119,6 +119,7 @@ public class Ex2UI extends JFrame implements ActionListener {
     }
 
     private void onCenterClicked(){
+        algo.center().getInfo();
         JOptionPane.showMessageDialog(null, "Graph Center Node Info\n" + algo.center().getInfo());
     }
 

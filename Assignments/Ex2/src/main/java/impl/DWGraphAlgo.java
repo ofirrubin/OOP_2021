@@ -123,7 +123,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
 
     private double pathDistance(List<NodeData> nodes){
         // Allows me to calculate path distance while saving the result of shortestPath for tsp
-        if (nodes.isEmpty()) return -1;
+        if (nodes == null || nodes.isEmpty()) return -1;
         double size = nodes.get(0).getWeight();
         for(int i=0; i < nodes.size() - 1; i ++){
             size += graph.getEdge(nodes.get(i).getKey(), nodes.get(i + 1).getKey()).getWeight() +

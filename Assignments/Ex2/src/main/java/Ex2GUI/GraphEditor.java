@@ -32,6 +32,7 @@ public class GraphEditor extends JFrame {
 
     public GraphEditor(DirectedWeightedGraphAlgorithms algo, GraphUI graphPanel) {
         this.setContentPane(mainPanel);
+        this.algo = algo;
         gUI = graphPanel;
         gUI.setLocationLabel(mouseGraphLocation);
         this.graphPanel.add(gUI);
@@ -43,6 +44,7 @@ public class GraphEditor extends JFrame {
         this.removeSelectorBtn.addActionListener(e -> gUI.mouseMode = GraphUI.MouseMode.RemoveNode);
         this.addNodeBtn.addActionListener(e -> gUI.mouseMode = GraphUI.MouseMode.AddNode);
         this.infoSelectorBtn.addActionListener(e -> gUI.mouseMode = GraphUI.MouseMode.Info);
+        this.saveBtn.addActionListener(this::saveFile);
         this.mouseGraphLocation.setText("Hover a Node to get ID and information");
 
     }
@@ -80,7 +82,7 @@ public class GraphEditor extends JFrame {
             JOptionPane.showMessageDialog(null, "One or more keys not found.");
         else if (g.getEdge(nodes.get(0).getKey(), nodes.get(1).getKey()) != null)
             JOptionPane.showMessageDialog(null, "Edge already exists");
-        else{
+        else {
             try {
                 o = JOptionPane.showInputDialog("Please enter edge weight: <Integer>");
                 double n = Double.parseDouble(o);
@@ -128,12 +130,18 @@ public class GraphEditor extends JFrame {
             if (p != null)
                 ImageIO.write(image, "jpeg", new File(p));
         } catch (IOException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Can't write the image");
         }
 
     }
 
-    private String getSavePath(FileFilter f, String title){
+    private void saveFile(ActionEvent actionEvent) {
+        String p = getSavePath(new FileNameExtensionFilter("JSON", "json"), "Select where to save the graph");
+        if (p != null)
+            algo.save(p);
+    }
+
+    private String getSavePath(FileFilter f, String title) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle(title);
         fileChooser.setFileFilter(f);
@@ -142,8 +150,7 @@ public class GraphEditor extends JFrame {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
             return fileToSave.getAbsolutePath();
-        }
-        else
+        } else
             return null;
     }
 }
