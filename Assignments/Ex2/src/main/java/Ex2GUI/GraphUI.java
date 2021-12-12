@@ -123,6 +123,7 @@ public class GraphUI extends JPanel implements MouseListener {
                 GeoLocation dstGeo = getPositioned(destNode.getLocation());
                 g.setColor(coloredNodes.contains(n) && coloredNodes.contains(destNode) ? sColor: pColor);
                 drawEdge(g, srcGeo, dstGeo);
+                drawArrow(g, srcGeo, dstGeo);
                 //drawArrowHead(g, srcGeo, dstGeo);
                 //t3dfx(g, srcGeo, dstGeo);
             });
@@ -139,70 +140,20 @@ public class GraphUI extends JPanel implements MouseListener {
         g.drawOval((int) g1.x() - radius, (int) g1.y() - radius, radius, radius);
     }
 
-    private void t3dfx(Graphics g, GeoLocation start, GeoLocation end){
-
-        final double startx = start.x();
-        final double starty = start.x();
-
-        double arrowSize = 0.2;
-
-        g = (Graphics2D) g;
-        final double deltax = startx - end.x();
-        final double result;
-        if (deltax == 0.0d) {
-            result = Math.PI / 2;
-        }
-        else {
-            result = Math.atan((starty - end.y()) / deltax) + (startx < end.x() ? Math.PI : 0);
-        }
-
-        final double angle = result;
-
-        final double arrowAngle = Math.PI / 12.0d;
-
-        final double x1 = arrowSize * Math.cos(angle - arrowAngle);
-        final double y1 = arrowSize * Math.sin(angle - arrowAngle);
-        final double x2 = arrowSize * Math.cos(angle + arrowAngle);
-        final double y2 = arrowSize * Math.sin(angle + arrowAngle);
-
-        final double cx = (arrowSize / 2.0f) * Math.cos(angle);
-        final double cy = (arrowSize / 2.0f) * Math.sin(angle);
-
-        final GeneralPath polygon = new GeneralPath();
-        polygon.moveTo(end.x(), end.y());
-        polygon.lineTo(end.x() + x1, end.y() + y1);
-        polygon.lineTo(end.x() + x2, end.y() + y2);
-        polygon.closePath();
-        ((Graphics2D) g).fill(polygon);
-
-        g.drawLine((int) startx, (int) starty, (int) (end.x() + cx), (int) (end.y() + cy));
-    }
-
-    private void drawArrowHead(Graphics2D g, GeoLocation src, GeoLocation dest){
-        g.setColor(Color.GREEN);
-        g.fill(createArrowShape(src, dest));
-    }
-
-    public static Shape createArrowShape(GeoLocation src, GeoLocation dest) {
-        Polygon arrowHead = new Polygon();
-        arrowHead.addPoint(-4,1);
-        arrowHead.addPoint(-4,5);
-        arrowHead.addPoint(-1,0);
-        arrowHead.addPoint(-4,-5);
-        arrowHead.addPoint(-4,-1);
-
-
-        double rotate = Math.atan2(dest.y() - src.y(), dest.x() - src.x());
-
-        AffineTransform transform = new AffineTransform();
-        transform.translate(src.x(), src.y());
-        //double ptDistance = fromPt.distance(toPt);
-        double scale = Math.max(2, Math.min(2, src.distance(dest) / 24));
-        //System.out.println(scale);
-        transform.scale(scale, scale);
-        transform.rotate(rotate);
-
-        return transform.createTransformedShape(arrowHead);
+    private void drawArrow(Graphics g, GeoLocation src, GeoLocation dest){
+        // Source: https://math.stackexchange.com/questions/1314006/drawing-an-arrow
+        double arrowLength = 10;
+        double lineLength = src.distance(dest);
+        double scale = arrowLength / lineLength;
+        int arrowAngle = 45; // so that in both sides it's 45 => 90 degree arrow
+        double dX = src.x() - dest.x();
+        double dY = src.y() - dest.y();
+        double sinA = Math.sin(arrowAngle);
+        double cosA = Math.cos(arrowAngle);
+        Geo g1 = new Geo(dest.x() + scale * (dX*cosA + dY*sinA), dest.y() - scale * (dY*cosA - dX*sinA),0);
+        Geo g2 = new Geo(dest.x() + scale * (dX*cosA - dY*sinA), dest.y() + scale * (dY*cosA + dX*sinA),0);
+        g.drawLine((int)dest.x(), (int)dest.y(), (int)g1.x(), (int)g1.y());
+        g.drawLine((int)dest.x(), (int)dest.y(), (int)g2.x(), (int)g2.y());
     }
 
     private void drawEdge(Graphics g, GeoLocation g1, GeoLocation g2) {
