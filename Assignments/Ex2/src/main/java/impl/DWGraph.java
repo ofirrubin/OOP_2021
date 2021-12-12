@@ -147,7 +147,9 @@ public class DWGraph implements DirectedWeightedGraph{
             }
             nAdjs -= links.get(key).size();
             adjs.remove(key);
+            adjs.put(key, new HashMap<>()); // Set again the new hashmap so next time we will have it
             links.remove(key);
+            links.put(key, new TreeSet<>()); // Set again the new hashmap so next time we will have it
         }
         changes ++;
         return nodes.remove(key);

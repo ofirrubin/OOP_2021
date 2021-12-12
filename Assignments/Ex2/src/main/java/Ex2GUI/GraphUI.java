@@ -6,22 +6,19 @@ import api.NodeData;
 import impl.Geo;
 import impl.Node;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class GraphUI extends JPanel implements MouseListener {
 
-    DirectedWeightedGraph graph;
+    public DirectedWeightedGraph graph;
     int width;
     int height;
 
@@ -35,12 +32,19 @@ public class GraphUI extends JPanel implements MouseListener {
     double minX, minY;
     double xD, yD;
     double xS, yS;
+    int highestID = 0;
 
     final Color nodeColor = Color.BLACK;
     final Color pColor = Color.RED;
     final Color sColor = Color.BLUE;
     ArrayList<NodeData> coloredNodes;
     ArrayList<NodeData> nodes;
+
+    public enum MouseMode{Info, RemoveNode, AddNode};
+
+    public MouseMode mouseMode;
+
+    private JLabel locationLabel;
 
     public GraphUI(DirectedWeightedGraph g, int rightPadding, int topPadding,int leftPadding, int bottomPadding) {
         this.coloredNodes = new ArrayList<>();
@@ -52,6 +56,8 @@ public class GraphUI extends JPanel implements MouseListener {
         this.nodes = new ArrayList<>();
         setScaleFactor(g.nodeIter());
         this.addMouseListener(this);
+        this.highestID = getHighestID();
+        mouseMode = MouseMode.Info;
     }
 
     public static GraphUI initColored(DirectedWeightedGraph g, int rightPadding, int topPadding,int leftPadding,
@@ -96,6 +102,10 @@ public class GraphUI extends JPanel implements MouseListener {
         return new Geo(rightPadding + (p1.x()  - minX) * xS , topPadding + (p1.y() - minY) * yS, p1.z());
     }
 
+    public GeoLocation getUnPositioned(int x, int y){
+        return new Geo(((x-rightPadding) / xS) + minX, ((y-topPadding) / yS) + minY, 0);
+    }
+
     private void draw(Graphics g2d) {
         // Set screen size
         this.width = this.getSize().width - widthPadding;
@@ -111,7 +121,7 @@ public class GraphUI extends JPanel implements MouseListener {
                 g.setColor(pColor);
                 GeoLocation dstGeo = getPositioned(graph.getNode(e.getDest()).getLocation());
                 drawEdge(g, srcGeo, dstGeo);
-                drawArrowHead(g, srcGeo, dstGeo);
+                //drawArrowHead(g, srcGeo, dstGeo);
             });
             g.setColor(coloredNodes.contains(n) ? sColor : nodeColor); // Drawing the point over the edges.
             drawFilledCircle(g, getPositioned(n.getLocation()), radius);
@@ -171,20 +181,71 @@ public class GraphUI extends JPanel implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        for(NodeData n: nodes){
-            GeoLocation g = n.getLocation();
-            if (e.getX() >= g.x() - radius && e.getX() <= g.x() + radius
-                    &&  e.getY() >= g.y() - radius && e.getY() <= g.y() + radius) {
-                ArrayList<String> edges = new ArrayList<>();
-                graph.edgeIter(n.getKey()).forEachRemaining(edg -> edges.add(edg.getSrc() + " -> " + edg.getDest() +
-                        "; Weight: " + edg.getWeight()));
-                ListDialog dialog = new ListDialog(n.getKey() + " > Info: " + n.getInfo() + " -> Edges: ",
-                        new JList(edges.toArray()));
-                //dialog.setOnOk(e -> System.out.println("Chosen item: " + dialog.getSelectedItem()));
-                dialog.show();
-                return;
+        NodeData n = getNodeInRadius(e);
+        switch (mouseMode) {
+            case Info -> {
+                if (n != null)
+                    showClickedInfo(n);
+                break;
+            }
+            case AddNode -> {
+                if (n == null)
+                    addNode(e);
+                break;
+            }
+            case RemoveNode -> {
+                if (n != null) {
+                    graph.removeNode(n.getKey());
+                    this.updateUI();
+                }
+                break;
             }
         }
+    }
+
+    public void setLocationLabel(JLabel l){
+        this.locationLabel = l;
+    }
+
+    public NodeData getNodeInRadius(MouseEvent e){
+        for(NodeData n: nodes) {
+            GeoLocation g = n.getLocation();
+            if(inRadius(e, g))
+                return n;
+        }
+        return null;
+    }
+
+    private boolean inRadius(MouseEvent e, GeoLocation g){
+        return e.getX() >= g.x() - radius && e.getX() <= g.x() + radius
+                &&  e.getY() >= g.y() - radius && e.getY() <= g.y() + radius;
+    }
+    private void addNode(MouseEvent e) {
+        GeoLocation g1 = getUnPositioned(e.getX(), e.getY());
+        Node n = new Node(++highestID, g1);
+        graph.addNode(n);
+        locationLabel.setText(n.getKey() + " > Info: " + n.getInfo());
+        this.updateUI();;
+    }
+
+    private int getHighestID(){
+        int max = Integer.MIN_VALUE;
+        Iterator<NodeData> nIter = graph.nodeIter();
+        while(nIter.hasNext()){
+            max = Math.max(max, nIter.next().getKey());
+        }
+        return max == Integer.MIN_VALUE ? 0 : max;
+    }
+
+    private void showClickedInfo(NodeData n){
+        ArrayList<String> edges = new ArrayList<>();
+        graph.edgeIter(n.getKey()).forEachRemaining(edg -> edges.add(edg.getSrc() + " -> " + edg.getDest() +
+                "; Weight: " + edg.getWeight()));
+        ListDialog dialog = new ListDialog(n.getKey() + " > Info: " + n.getInfo() + " -> Edges: ",
+                new JList(edges.toArray()));
+        //dialog.setOnOk(e -> System.out.println("Chosen item: " + dialog.getSelectedItem()));
+        dialog.show();
+        locationLabel.setText(n.getKey() + " > Info: " + n.getInfo());
     }
 
     /**
@@ -194,7 +255,6 @@ public class GraphUI extends JPanel implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-
     }
 
     /**
@@ -204,7 +264,6 @@ public class GraphUI extends JPanel implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     /**
