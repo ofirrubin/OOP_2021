@@ -1,4 +1,5 @@
 import Ex2GUI.Ex2UI;
+import Ex2GUI.GraphEditor;
 import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
 import impl.DWGraphAlgo;

@@ -17,6 +17,8 @@
       <sourceFolder url="file://$MODULE_DIR$/Class_Material/Week_2/T2-ItaiLash/vehicle" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Class_Material/Week_3/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Class_Material/Week_3/T3-ItaiLash/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Assignments/Ex2/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Assignments/Ex2/src/main/java/Ex2GUI" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv2" />
     </content>

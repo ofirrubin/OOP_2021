@@ -9,9 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Updated some comments">
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Fixed launch with no path">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphEditor.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/OOP_2021.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/OOP_2021.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Ex2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Ex2.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +54,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="424" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="373" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
@@ -71,7 +78,7 @@
     <configuration name="Ex2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Ex2" />
       <module name="Ex2" />
-      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/data/G2.json" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/data/G1.json" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -170,7 +177,8 @@
       <workItem from="1638888586165" duration="11524000" />
       <workItem from="1638957456286" duration="6276000" />
       <workItem from="1638967912711" duration="31424000" />
-      <workItem from="1639040880368" duration="36612000" />
+      <workItem from="1639040880368" duration="37314000" />
+      <workItem from="1639303126513" duration="16476000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -270,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639096602832</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fixed launch with no path">
+      <created>1639097731406</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1639097731406</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +319,8 @@
     <MESSAGE value="Updated UI with graph, working on shortest path graph" />
     <MESSAGE value="Updated TSP GUI,&#10;I want to add Checklist for tsp cities selection" />
     <MESSAGE value="Updated some comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated some comments" />
+    <MESSAGE value="Fixed launch with no path" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed launch with no path" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

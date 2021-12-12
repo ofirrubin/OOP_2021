@@ -125,6 +125,7 @@ public class DWGraph implements DirectedWeightedGraph{
      */
     @Override
     public Iterator<EdgeData> edgeIter(int node_id) {
+        if (adjs.get(node_id) == null) return Collections.emptyIterator();
         return adjs.get(node_id).values().iterator();
     }
 
@@ -142,7 +143,7 @@ public class DWGraph implements DirectedWeightedGraph{
         if (adjs.containsKey(key)) {
             for (Integer id: links.get(key)) {
                 if (adjs.get(id).remove(id + ";" + key) != null)
-                    changes ++;
+                    changes++;
             }
             nAdjs -= links.get(key).size();
             adjs.remove(key);

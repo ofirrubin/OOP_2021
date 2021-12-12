@@ -6,10 +6,15 @@ import api.NodeData;
 import impl.Geo;
 import impl.Node;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,11 +24,16 @@ public class GraphUI extends JPanel implements MouseListener {
     DirectedWeightedGraph graph;
     int width;
     int height;
+
     int rightPadding;
+    int widthPadding;
+
     int topPadding;
+    int heightPadding;
 
     int radius;
     double minX, minY;
+    double xD, yD;
     double xS, yS;
 
     final Color nodeColor = Color.BLACK;
@@ -32,30 +42,26 @@ public class GraphUI extends JPanel implements MouseListener {
     ArrayList<NodeData> coloredNodes;
     ArrayList<NodeData> nodes;
 
-    public GraphUI(DirectedWeightedGraph g,
-                   int rightPadding, int topPadding,int leftPadding, int bottomPadding,
-                   int width, int height) {
+    public GraphUI(DirectedWeightedGraph g, int rightPadding, int topPadding,int leftPadding, int bottomPadding) {
         this.coloredNodes = new ArrayList<>();
         this.graph = g;
-        this.width = width - leftPadding - rightPadding;
+        this.widthPadding = leftPadding + rightPadding;
         this.rightPadding = rightPadding;
         this.topPadding = topPadding;
-        this.height = height - bottomPadding - topPadding;
+        this.heightPadding = bottomPadding + topPadding;
         this.nodes = new ArrayList<>();
-        setScale(g.nodeIter());
+        setScaleFactor(g.nodeIter());
         this.addMouseListener(this);
     }
 
-    public static GraphUI initColored(DirectedWeightedGraph g,
-                                      int rightPadding, int topPadding,int leftPadding, int bottomPadding,
-                                      int width, int height,
-                                      List<NodeData> coloredNodes){
-        GraphUI gui = new GraphUI(g, rightPadding, topPadding, leftPadding, bottomPadding, width, height);
+    public static GraphUI initColored(DirectedWeightedGraph g, int rightPadding, int topPadding,int leftPadding,
+                                      int bottomPadding, List<NodeData> coloredNodes){
+        GraphUI gui = new GraphUI(g, rightPadding, topPadding, leftPadding, bottomPadding);
         gui.coloredNodes = (ArrayList<NodeData>) coloredNodes;
         return gui;
     }
 
-    private void setScale(Iterator<NodeData> nIter) {
+    private void setScaleFactor(Iterator<NodeData> nIter) {
         double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE; // min contains max value thus will always be changed.
         double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE; // max contains min value thus will always be changed.
         while (nIter.hasNext()) {
@@ -68,8 +74,14 @@ public class GraphUI extends JPanel implements MouseListener {
         }
         this.minX = minX;
         this.minY = minY;
-        double xD = Math.abs(maxX - minX);
-        double yD = Math.abs(maxY - minY);
+
+
+        xD = Math.abs(maxX - minX);
+        yD = Math.abs(maxY - minY);
+        setScale();
+    }
+    private void setScale(){
+
         if (xD < width) // We want it to be wider
             xS = width / xD;
         else // We want it to be narrower
@@ -85,17 +97,25 @@ public class GraphUI extends JPanel implements MouseListener {
     }
 
     private void draw(Graphics g2d) {
+        // Set screen size
+        this.width = this.getSize().width - widthPadding;
+        this.height = this.getSize().height - heightPadding;
+        radius = Math.min(width, height) / 80; // Set new radius
+        // Set scale
+        setScale();
+
         Graphics2D g = (Graphics2D) g2d;
-        radius = Math.min(width, height) / 80;
         graph.nodeIter().forEachRemaining(n -> {
-            g.setColor(pColor);
-            GeoLocation geo =  getPositioned(n.getLocation());
+            GeoLocation srcGeo =  getPositioned(n.getLocation());
             graph.edgeIter(n.getKey()).forEachRemaining(e -> {
-                drawEdge(g, geo, getPositioned(graph.getNode(e.getDest()).getLocation()));
+                g.setColor(pColor);
+                GeoLocation dstGeo = getPositioned(graph.getNode(e.getDest()).getLocation());
+                drawEdge(g, srcGeo, dstGeo);
+                drawArrowHead(g, srcGeo, dstGeo);
             });
             g.setColor(coloredNodes.contains(n) ? sColor : nodeColor); // Drawing the point over the edges.
             drawFilledCircle(g, getPositioned(n.getLocation()), radius);
-            nodes.add(new Node(n.getKey(), n.getWeight(), n.getInfo(), n.getTag(), geo));
+            nodes.add(new Node(n.getKey(), n.getWeight(), n.getInfo(), n.getTag(), srcGeo));
         });
     }
 
@@ -106,10 +126,35 @@ public class GraphUI extends JPanel implements MouseListener {
         g.drawOval((int) g1.x() - radius, (int) g1.y() - radius, radius, radius);
     }
 
+    private void drawArrowHead(Graphics2D g, GeoLocation src, GeoLocation dest){
+        g.setColor(Color.GREEN);
+        g.fill(createArrowShape(src, dest));
+    }
+
+    public static Shape createArrowShape(GeoLocation src, GeoLocation dest) {
+        Polygon arrowHead = new Polygon();
+        arrowHead.addPoint(-4,1);
+        arrowHead.addPoint(-4,5);
+        arrowHead.addPoint(-1,0);
+        arrowHead.addPoint(-4,-5);
+        arrowHead.addPoint(-4,-1);
+
+
+        double rotate = Math.atan2(dest.y() - src.y(), dest.x() - src.x());
+
+        AffineTransform transform = new AffineTransform();
+        transform.translate(src.x(), src.y());
+        //double ptDistance = fromPt.distance(toPt);
+        double scale = Math.max(2, Math.min(2, src.distance(dest) / 24));
+        //System.out.println(scale);
+        transform.scale(scale, scale);
+        transform.rotate(rotate);
+
+        return transform.createTransformedShape(arrowHead);
+    }
+
     private void drawEdge(Graphics g, GeoLocation g1, GeoLocation g2) {
-        int moveSize = radius / 6;
-        g.drawLine((int) g1.x() - moveSize, (int) g1.y() + moveSize,
-                (int) g2.x() + moveSize, (int) g2.y() - moveSize);
+        g.drawLine((int) g1.x(), (int) g1.y(), (int) g2.x(), (int) g2.y());
     }
 
     @Override
@@ -179,5 +224,13 @@ public class GraphUI extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    public BufferedImage getScreenshot(){
+        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image.createGraphics();
+        printAll(g);
+        g.dispose();
+        return image;
     }
 }
