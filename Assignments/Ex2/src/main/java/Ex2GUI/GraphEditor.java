@@ -27,8 +27,8 @@ public class GraphEditor extends JFrame {
     private JButton addEdgeButton;
     private JLabel mouseGraphLocation;
 
-    private DirectedWeightedGraphAlgorithms algo;
-    private GraphUI gUI;
+    private final DirectedWeightedGraphAlgorithms algo;
+    private final GraphUI gUI;
 
     public GraphEditor(DirectedWeightedGraphAlgorithms algo, GraphUI graphPanel) {
         this.setContentPane(mainPanel);

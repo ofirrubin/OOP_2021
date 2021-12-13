@@ -11,45 +11,45 @@ public interface NodeData {
 	 * @return
 	 *
 	 */
-	public int getKey();
+    int getKey();
 	/** Returns the location of this node, if none return null.
 	 * @return
 	 */
-	public GeoLocation getLocation();
+    GeoLocation getLocation();
 	/** Allows changing this node's location.
 	 * @param p - new new location  (position) of this node.
 	 */
-	public void setLocation(GeoLocation p);
+    void setLocation(GeoLocation p);
 	/**
 	 * Returns the weight associated with this node.
 	 * @return
 	 */
-	public double getWeight();
+    double getWeight();
 	/**
 	 * Allows changing this node's weight.
 	 * @param w - the new weight
 	 */
-	public void setWeight(double w);
+    void setWeight(double w);
 	/**
 	 * Returns the remark (meta data) associated with this node.
 	 * @return
 	 */
-	public String getInfo();
+    String getInfo();
 	/**
 	 * Allows changing the remark (meta data) associated with this node.
 	 * @param s
 	 */
-	public void setInfo(String s);
+    void setInfo(String s);
 	/**
 	 * Temporal data (aka color: e,g, white, gray, black) 
 	 * which can be used be algorithms 
 	 * @return
 	 */
-	public int getTag();
+    int getTag();
 	/** 
 	 * Allows setting the "tag" value for temporal marking an node - common
 	 * practice for marking by algorithms.
 	 * @param t - the new value of the tag
 	 */
-	public void setTag(int t);
+    void setTag(int t);
 }

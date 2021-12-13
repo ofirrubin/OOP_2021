@@ -42,7 +42,7 @@ public class GraphUI extends JPanel implements MouseListener {
     ArrayList<NodeData> nodes;
     boolean changed = false;
 
-    public enum MouseMode{Info, RemoveNode, AddNode};
+    public enum MouseMode{Info, RemoveNode, AddNode}
 
     public MouseMode mouseMode;
 
@@ -266,7 +266,7 @@ public class GraphUI extends JPanel implements MouseListener {
         Node n = new Node(++highestID, g1);
         graph.addNode(n);
         locationLabel.setText(n.getKey() + " > Info: " + n.getInfo() + "\n");
-        this.updateUI();;
+        this.updateUI();
     }
 
 

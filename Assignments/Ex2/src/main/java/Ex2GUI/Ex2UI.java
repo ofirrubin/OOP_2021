@@ -27,7 +27,7 @@ public class Ex2UI extends JFrame implements ActionListener {
     private JButton showGraphButton;
     private JButton newGraphButton;
 
-    private DirectedWeightedGraphAlgorithms algo;
+    private final DirectedWeightedGraphAlgorithms algo;
     private final JButton[] actionButtons;
     final int graphPadding = 10; // All sides padding
     final int graphBoxSize = 500; // Square sized graph

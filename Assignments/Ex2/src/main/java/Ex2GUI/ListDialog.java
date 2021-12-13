@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 // From https://stackoverflow.com/a/37630400
 public class ListDialog {
-    private JList list;
-    private JLabel label;
+    private final JList list;
+    private final JLabel label;
     private JOptionPane optionPane;
     private JButton okButton, cancelButton;
     private ActionListener okEvent, cancelEvent;
