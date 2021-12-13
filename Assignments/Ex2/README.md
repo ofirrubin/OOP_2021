@@ -1,5 +1,10 @@
 ## Ex2 OOP_2021 - Directed Graph Algorithm & GUI
 
+## Graph viewer and editor
+You can read details about the program below.
+Ready to install?
+Just download the latest version from the releases :)
+
 # How to run:
 ### The Program allows you to run with a JSON file as an argument:
 ```java -jar Ex2.jar <Graph.json>```
