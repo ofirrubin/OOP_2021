@@ -156,7 +156,6 @@ public class GraphUI extends JPanel implements MouseListener {
         // Set scale
         if (graph.nodeSize() == 0)
             setScaleAsWindow();
-            // Don't recalculate because we already know the maximum and minimum
         else
             setScaleFactor(graph.nodeIter());
 
@@ -169,8 +168,6 @@ public class GraphUI extends JPanel implements MouseListener {
                 g.setColor(coloredNodes.contains(n) && coloredNodes.contains(destNode) ? sColor: pColor);
                 drawEdge(g, srcGeo, dstGeo);
                 drawArrow(g, srcGeo, dstGeo);
-                //drawArrowHead(g, srcGeo, dstGeo);
-                //t3dfx(g, srcGeo, dstGeo);
             });
             g.setColor(coloredNodes.contains(n) ? sColor : nodeColor); // Drawing the point over the edges.
             drawFilledCircle(g, getPositioned(n.getLocation()), radius);
@@ -182,24 +179,25 @@ public class GraphUI extends JPanel implements MouseListener {
         g.fillOval((int) g1.x() - radius, (int) g1.y() - radius, radius, radius);
     }
 
-    private void drawCircle(Graphics g, GeoLocation g1, int radius) {
-        g.drawOval((int) g1.x() - radius, (int) g1.y() - radius, radius, radius);
-    }
-
     private void drawArrow(Graphics g, GeoLocation src, GeoLocation dest){
         // Source: https://math.stackexchange.com/questions/1314006/drawing-an-arrow
-        double arrowLength = 10;
         double lineLength = src.distance(dest);
+        if (lineLength == 0)
+            return;
+        double arrowLength = lineLength / 16;
         double scale = arrowLength / lineLength;
-        int arrowAngle = 70; // so that in both sides it's 45 => 90 degree arrow
+        int arrowAngle = 65;
         double dX = src.x() - dest.x();
         double dY = src.y() - dest.y();
         double sinA = Math.sin(arrowAngle);
         double cosA = Math.cos(arrowAngle);
-        Geo g1 = new Geo(dest.x() + scale * (dX*cosA + dY*sinA), dest.y() + scale * (dY*cosA - dX*sinA),0);
-        Geo g2 = new Geo(dest.x() + scale * (dX*cosA - dY*sinA), dest.y() + scale * (dY*cosA + dX*sinA),0);
-        g.drawLine((int)dest.x(), (int)dest.y(), (int)g1.x(), (int)g1.y());
-        g.drawLine((int)dest.x(), (int)dest.y(), (int)g2.x(), (int)g2.y());
+
+        Geo arrowHead = new Geo(src.x() + 0.8 * (dest.x() - src.x()), src.y() + 0.8 * (dest.y() - src.y()), 0);
+
+        Geo g1 = new Geo(arrowHead.x() + scale * (dX*cosA + dY*sinA), arrowHead.y() + scale * (dY*cosA - dX*sinA),0);
+        Geo g2 = new Geo(arrowHead.x() + scale * (dX*cosA - dY*sinA), arrowHead.y() + scale * (dY*cosA + dX*sinA),0);
+        g.drawLine((int)arrowHead.x(), (int)arrowHead.y(), (int)g1.x(), (int)g1.y());
+        g.drawLine((int)arrowHead.x(), (int)arrowHead.y(), (int)g2.x(), (int)g2.y());
     }
 
     private void drawEdge(Graphics g, GeoLocation g1, GeoLocation g2) {

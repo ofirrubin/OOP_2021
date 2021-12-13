@@ -9,15 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Recreating arrows using https://math.stackexchange.com/questions/1314006/drawing-an-arrow">
-      <change afterPath="$PROJECT_DIR$/src/main/java/GraphGenerator.java" afterDir="false" />
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Fixed isConnected in both graph and algo so it will be empty graph - safe.&#10;In addition, fixed adaptive scaling with new added nodes.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +164,7 @@
       <workItem from="1638967912711" duration="31424000" />
       <workItem from="1639040880368" duration="37314000" />
       <workItem from="1639303126513" duration="24782000" />
-      <workItem from="1639338713691" duration="24217000" />
+      <workItem from="1639338713691" duration="26049000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -305,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639352140179</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Fixed isConnected in both graph and algo so it will be empty graph - safe.&#10;In addition, fixed adaptive scaling with new added nodes.">
+      <created>1639395389081</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1639395389081</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,23 +347,10 @@
     <MESSAGE value="Added FileChooser to exported the image, fixed some bugs related to remove edge, then uploading version with add/remove edges using prompts." />
     <MESSAGE value="3D fx found xD" />
     <MESSAGE value="Recreating arrows using https://math.stackexchange.com/questions/1314006/drawing-an-arrow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Recreating arrows using https://math.stackexchange.com/questions/1314006/drawing-an-arrow" />
+    <MESSAGE value="Fixed isConnected in both graph and algo so it will be empty graph - safe.&#10;In addition, fixed adaptive scaling with new added nodes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed isConnected in both graph and algo so it will be empty graph - safe.&#10;In addition, fixed adaptive scaling with new added nodes." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java</url>
-          <line>156</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="key" />
