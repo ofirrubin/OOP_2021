@@ -187,15 +187,15 @@ public class GraphUI extends JPanel implements MouseListener {
         double arrowLength = lineLength / 16;
         double scale = arrowLength / lineLength;
         int arrowAngle = 65;
-        double dX = src.x() - dest.x();
-        double dY = src.y() - dest.y();
+        Geo arrowHead = new Geo(src.x() + 0.8 * (dest.x() - src.x()), src.y() + 0.8 * (dest.y() - src.y()), 0);
+
+        double dX = src.x() - arrowHead.x();
+        double dY = src.y() - arrowHead.y();
         double sinA = Math.sin(arrowAngle);
         double cosA = Math.cos(arrowAngle);
 
-        Geo arrowHead = new Geo(src.x() + 0.8 * (dest.x() - src.x()), src.y() + 0.8 * (dest.y() - src.y()), 0);
-
-        Geo g1 = new Geo(arrowHead.x() + scale * (dX*cosA + dY*sinA), arrowHead.y() + scale * (dY*cosA - dX*sinA),0);
-        Geo g2 = new Geo(arrowHead.x() + scale * (dX*cosA - dY*sinA), arrowHead.y() + scale * (dY*cosA + dX*sinA),0);
+        Geo g1 = new Geo(arrowHead.x() - scale * (dX*cosA + dY*sinA), arrowHead.y() - scale * (dY*cosA - dX*sinA),0);
+        Geo g2 = new Geo(arrowHead.x() - scale * (dX*cosA - dY*sinA), arrowHead.y() - scale * (dY*cosA + dX*sinA),0);
         g.drawLine((int)arrowHead.x(), (int)arrowHead.y(), (int)g1.x(), (int)g1.y());
         g.drawLine((int)arrowHead.x(), (int)arrowHead.y(), (int)g2.x(), (int)g2.y());
     }

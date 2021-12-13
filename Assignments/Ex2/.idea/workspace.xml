@@ -13,15 +13,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Fixed arrows position and it is now using adaptive arrow length">
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphEditor.java" afterDir="false" />
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Updated JAR">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/ListDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/ListDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/api/DirectedWeightedGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/DirectedWeightedGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/api/DirectedWeightedGraphAlgorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/DirectedWeightedGraphAlgorithms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/api/EdgeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/EdgeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/api/NodeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/NodeData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +169,7 @@
       <workItem from="1638967912711" duration="31424000" />
       <workItem from="1639040880368" duration="37314000" />
       <workItem from="1639303126513" duration="24782000" />
-      <workItem from="1639338713691" duration="26222000" />
+      <workItem from="1639338713691" duration="27134000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -324,7 +318,21 @@
       <option name="project" value="LOCAL" />
       <updated>1639397160869</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Code cleanup (using IntelliJ)">
+      <created>1639397307354</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1639397307354</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Updated JAR">
+      <created>1639397342882</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1639397342882</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,7 +351,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Uploaded" />
     <MESSAGE value="Created isConnected - Using DFS" />
     <MESSAGE value="Created center" />
     <MESSAGE value="Fixed some issues in GSON" />
@@ -367,7 +374,9 @@
     <MESSAGE value="Recreating arrows using https://math.stackexchange.com/questions/1314006/drawing-an-arrow" />
     <MESSAGE value="Fixed isConnected in both graph and algo so it will be empty graph - safe.&#10;In addition, fixed adaptive scaling with new added nodes." />
     <MESSAGE value="Fixed arrows position and it is now using adaptive arrow length" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed arrows position and it is now using adaptive arrow length" />
+    <MESSAGE value="Code cleanup (using IntelliJ)" />
+    <MESSAGE value="Updated JAR" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated JAR" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
