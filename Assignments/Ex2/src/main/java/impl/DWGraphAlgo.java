@@ -65,6 +65,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         if (graph == null) return false;
         HashMap<Integer, Boolean> visited = new HashMap<>();
         Iterator<NodeData> nIter = graph.nodeIter();
+        if(!nIter.hasNext()) return false;
         DirectedWeightedGraph trnsp = new DWGraph();
         NodeData n = nIter.next(); // Select a starting node
 
@@ -158,6 +159,7 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
         return previousList == null ? null : buildPath(src, dest, previousList);
     }
     private HashMap<Integer, Integer> shortestPathPointer(int src, int dest) {
+        if (graph.getNode(src) == null || graph.getNode(dest) == null) return null;
         NodeData[] nData = {graph.getNode(src)}; // Using Wrapper to use in forEach.
         // I need to save keys, weights & previous as I don't want to edit the graph.
         HashMap<Integer, Double> weights = new HashMap<>();
@@ -178,6 +180,9 @@ public class DWGraphAlgo implements DirectedWeightedGraphAlgorithms {
             explored.add(nData[0].getKey());
            graph.edgeIter(nData[0].getKey()).forEachRemaining(edgs ->{
                 NodeData n = graph.getNode(edgs.getDest());
+                if (n == null){
+                    System.out.println(edgs.getDest());
+                }
                 int nDataKey = nData[0].getKey();
                 double weight = weights.get(nDataKey) + edgs.getWeight(); // nData is in weights as we always adding it while adding to frontier.
                 if (!explored.contains(n.getKey())) {

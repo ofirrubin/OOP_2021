@@ -77,7 +77,8 @@ public class DWGraph implements DirectedWeightedGraph{
      */
     @Override
     public void connect(int src, int dest, double w) {
-        // Assuming src and dest is in the graph.
+        if (!nodes.containsKey(src) || !nodes.containsKey(dest)) return; // Invalid, don't add
+        if (src == dest) return; // Invalid
         if (!adjs.containsKey(src))
             adjs.put(src, new HashMap<>());
         if (!links.containsKey(dest))

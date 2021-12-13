@@ -3,6 +3,7 @@ package Ex2GUI;
 import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
 import api.NodeData;
+import impl.DWGraph;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -24,6 +25,7 @@ public class Ex2UI extends JFrame implements ActionListener {
     private JButton shortestPathButton;
 
     private JButton showGraphButton;
+    private JButton newGraphButton;
 
     private DirectedWeightedGraphAlgorithms algo;
     private final JButton[] actionButtons;
@@ -49,6 +51,10 @@ public class Ex2UI extends JFrame implements ActionListener {
 
     private void setButtonsVisibility() {
         boolean state = algo == null || algo.getGraph() == null;
+        if (state)
+            newGraphButton.setText("Create new graph");
+        else
+            newGraphButton.setText("Reset current graph");
         for (JButton b : actionButtons)
             b.setVisible(!state);
         if (!state) // Override visibility for tsp by isConnected
@@ -93,7 +99,14 @@ public class Ex2UI extends JFrame implements ActionListener {
         this.tspButton.addActionListener( e -> onTspClicked());
         this.centerButton.addActionListener( e -> onCenterClicked());
         this.shortestPathButton.addActionListener( e -> onShortestPathClicked());
+        this.newGraphButton.addActionListener(e -> setNewGraph());
     }
+
+    private void setNewGraph() {
+        this.algo.init(new DWGraph());
+        setButtonsVisibility();
+    }
+
 
     private void onLoadClicked(){
         JFileChooser fC = new JFileChooser();

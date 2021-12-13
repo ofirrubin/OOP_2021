@@ -9,11 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Added FileChooser to exported the image, fixed some bugs related to remove edge, then uploading version with add/remove edges using prompts.">
+    <list default="true" id="4bfbc515-17ef-4a22-9edd-b63f5fa9f5f3" name="Changes" comment="Recreating arrows using https://math.stackexchange.com/questions/1314006/drawing-an-arrow">
+      <change afterPath="$PROJECT_DIR$/src/main/java/GraphGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/Ex2UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphEditor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/impl/DWGraphAlgo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +96,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GraphGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GraphGenerator" />
+      <module name="Ex2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DWGraphAlgoTest.center" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ex2" />
       <extension name="coverage">
@@ -104,22 +114,6 @@
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.DWGraphAlgoTest" />
       <option name="METHOD_NAME" value="center" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DWGraphAlgoTest.load" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ex2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.DWGraphAlgoTest" />
-      <option name="METHOD_NAME" value="load" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -145,16 +139,16 @@
       <item itemvalue="Application.Ex2" />
       <item itemvalue="Application.Ex2UI" />
       <item itemvalue="JUnit.DWGraphAlgoTest.center" />
-      <item itemvalue="JUnit.DWGraphAlgoTest.load" />
       <item itemvalue="JUnit.DWGraphAlgoTest.shortestPathDist" />
+      <item itemvalue="Application.GraphGenerator" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Ex2" />
+        <item itemvalue="Application.GraphGenerator" />
         <item itemvalue="Application.Ex2UI" />
         <item itemvalue="JUnit.DWGraphAlgoTest.center" />
         <item itemvalue="JUnit.DWGraphAlgoTest.shortestPathDist" />
-        <item itemvalue="JUnit.DWGraphAlgoTest.load" />
       </list>
     </recent_temporary>
   </component>
@@ -176,7 +170,7 @@
       <workItem from="1638967912711" duration="31424000" />
       <workItem from="1639040880368" duration="37314000" />
       <workItem from="1639303126513" duration="24782000" />
-      <workItem from="1639338713691" duration="10682000" />
+      <workItem from="1639338713691" duration="24217000" />
     </task>
     <task id="LOCAL-00001" summary="Uploaded">
       <created>1638916678546</created>
@@ -297,7 +291,21 @@
       <option name="project" value="LOCAL" />
       <updated>1639348451489</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="3D fx found xD">
+      <created>1639350356313</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1639350356313</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Recreating arrows using https://math.stackexchange.com/questions/1314006/drawing-an-arrow">
+      <created>1639352140179</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1639352140179</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -336,15 +344,22 @@
     <MESSAGE value="Got it into new panel so I can add features such as save image, remove points, add points etc.&#10;You can now also export as an image." />
     <MESSAGE value="Fixed some issues, added some features" />
     <MESSAGE value="Added FileChooser to exported the image, fixed some bugs related to remove edge, then uploading version with add/remove edges using prompts." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added FileChooser to exported the image, fixed some bugs related to remove edge, then uploading version with add/remove edges using prompts." />
+    <MESSAGE value="3D fx found xD" />
+    <MESSAGE value="Recreating arrows using https://math.stackexchange.com/questions/1314006/drawing-an-arrow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Recreating arrows using https://math.stackexchange.com/questions/1314006/drawing-an-arrow" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Ex2GUI/GraphEditor.java</url>
-          <line>140</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Ex2GUI/GraphUI.java</url>
+          <line>156</line>
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

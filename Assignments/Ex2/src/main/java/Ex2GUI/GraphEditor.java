@@ -100,6 +100,7 @@ public class GraphEditor extends JFrame {
     }
 
     private ArrayList<NodeData> userInputParser(String userInput) {
+        if (userInput == null) return null;
         String[] kS = userInput.split(","); // Split inputs
         if (kS.length != 2) {
             JOptionPane.showMessageDialog(null, "Your input is not valid. You must enter <src,dest> i.e '3,2'");

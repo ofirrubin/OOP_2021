@@ -8,10 +8,9 @@ import impl.Node;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.GeneralPath;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,6 +30,7 @@ public class GraphUI extends JPanel implements MouseListener {
 
     int radius;
     double minX, minY;
+    double maxX, maxY;
     double xD, yD;
     double xS, yS;
     int highestID;
@@ -40,6 +40,7 @@ public class GraphUI extends JPanel implements MouseListener {
     final Color sColor = Color.BLUE;
     ArrayList<NodeData> coloredNodes;
     ArrayList<NodeData> nodes;
+    boolean changed = false;
 
     public enum MouseMode{Info, RemoveNode, AddNode};
 
@@ -59,7 +60,26 @@ public class GraphUI extends JPanel implements MouseListener {
         this.addMouseListener(this);
         this.highestID = getHighestID();
         mouseMode = MouseMode.Info;
+
+        this.addMouseMotionListener(new MouseAdapter() {
+            /**
+             * {@inheritDoc}
+             *
+             * @param e
+             * @since 1.6
+             */
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                super.mouseMoved(e);
+                GeoLocation g1 = getUnPositioned(e.getX(), e.getY());
+                if (locationLabel != null){
+                    locationLabel.setText("Scale: (" + xS + ", " + yS + ") Location on screen:" +
+                            e.getX() + ", " + e.getY() + "\nLocation on graph: (" + g1.x() +", " + g1.y() +",0)");
+                }
+            }
+        });
     }
+
 
     public static GraphUI initColored(DirectedWeightedGraph g, int rightPadding, int topPadding,int leftPadding,
                                       int bottomPadding, List<NodeData> coloredNodes){
@@ -69,8 +89,15 @@ public class GraphUI extends JPanel implements MouseListener {
     }
 
     private void setScaleFactor(Iterator<NodeData> nIter) {
-        double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE; // min contains max value thus will always be changed.
-        double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE; // max contains min value thus will always be changed.
+        if (!nIter.hasNext()) {
+            setScaleAsWindow();
+            return;
+        }
+        minX = Double.MAX_VALUE;
+        minY = Double.MAX_VALUE; // min contains max value thus will always be changed (or equal to max).
+        maxX = Double.MIN_VALUE;
+        maxY = Double.MIN_VALUE; // max contains min value thus will always be changed (or equal to min).
+
         while (nIter.hasNext()) {
             GeoLocation n = nIter.next().getLocation();
             minX = Math.min(minX, n.x());
@@ -79,14 +106,28 @@ public class GraphUI extends JPanel implements MouseListener {
             minY = Math.min(minY, n.y());
             maxY = Math.max(maxY, n.y());
         }
-        this.minX = minX;
-        this.minY = minY;
 
-
+        if (maxX == minX && maxY == minY){
+            if (maxX == 0)
+                maxX = this.getSize().getWidth();
+            if (maxY == 0)
+                maxY = this.getSize().getHeight();
+            minY = 0;
+            minX = 0;
+        }
         xD = Math.abs(maxX - minX);
         yD = Math.abs(maxY - minY);
         setScale();
     }
+
+    private void setScaleAsWindow(){
+        this.minX = 0;
+        this.minY = 0;
+        xD = this.getSize().width;
+        yD = this.getSize().height;
+        xS = yS = 1;
+    }
+
     private void setScale(){
 
         if (xD < width) // We want it to be wider
@@ -113,7 +154,11 @@ public class GraphUI extends JPanel implements MouseListener {
         this.height = this.getSize().height - heightPadding;
         radius = Math.min(width, height) / 80; // Set new radius
         // Set scale
-        setScale();
+        if (graph.nodeSize() == 0)
+            setScaleAsWindow();
+            // Don't recalculate because we already know the maximum and minimum
+        else
+            setScaleFactor(graph.nodeIter());
 
         Graphics2D g = (Graphics2D) g2d;
         graph.nodeIter().forEachRemaining(n -> {
@@ -136,6 +181,7 @@ public class GraphUI extends JPanel implements MouseListener {
     private void drawFilledCircle(Graphics g, GeoLocation g1, int radius) {
         g.fillOval((int) g1.x() - radius, (int) g1.y() - radius, radius, radius);
     }
+
     private void drawCircle(Graphics g, GeoLocation g1, int radius) {
         g.drawOval((int) g1.x() - radius, (int) g1.y() - radius, radius, radius);
     }
@@ -145,12 +191,12 @@ public class GraphUI extends JPanel implements MouseListener {
         double arrowLength = 10;
         double lineLength = src.distance(dest);
         double scale = arrowLength / lineLength;
-        int arrowAngle = 45; // so that in both sides it's 45 => 90 degree arrow
+        int arrowAngle = 70; // so that in both sides it's 45 => 90 degree arrow
         double dX = src.x() - dest.x();
         double dY = src.y() - dest.y();
         double sinA = Math.sin(arrowAngle);
         double cosA = Math.cos(arrowAngle);
-        Geo g1 = new Geo(dest.x() + scale * (dX*cosA + dY*sinA), dest.y() - scale * (dY*cosA - dX*sinA),0);
+        Geo g1 = new Geo(dest.x() + scale * (dX*cosA + dY*sinA), dest.y() + scale * (dY*cosA - dX*sinA),0);
         Geo g2 = new Geo(dest.x() + scale * (dX*cosA - dY*sinA), dest.y() + scale * (dY*cosA + dX*sinA),0);
         g.drawLine((int)dest.x(), (int)dest.y(), (int)g1.x(), (int)g1.y());
         g.drawLine((int)dest.x(), (int)dest.y(), (int)g2.x(), (int)g2.y());
@@ -182,13 +228,16 @@ public class GraphUI extends JPanel implements MouseListener {
                 break;
             }
             case AddNode -> {
-                if (n == null)
+                if (n == null) {
                     addNode(e);
+                    changed = true;
+                }
                 break;
             }
             case RemoveNode -> {
                 if (n != null) {
                     graph.removeNode(n.getKey());
+                    changed = true;
                     this.updateUI();
                 }
                 break;
@@ -213,13 +262,15 @@ public class GraphUI extends JPanel implements MouseListener {
         return e.getX() >= g.x() - radius && e.getX() <= g.x() + radius
                 &&  e.getY() >= g.y() - radius && e.getY() <= g.y() + radius;
     }
+
     private void addNode(MouseEvent e) {
         GeoLocation g1 = getUnPositioned(e.getX(), e.getY());
         Node n = new Node(++highestID, g1);
         graph.addNode(n);
-        locationLabel.setText(n.getKey() + " > Info: " + n.getInfo());
+        locationLabel.setText(n.getKey() + " > Info: " + n.getInfo() + "\n");
         this.updateUI();;
     }
+
 
     private int getHighestID(){
         int max = Integer.MIN_VALUE;
@@ -238,7 +289,6 @@ public class GraphUI extends JPanel implements MouseListener {
                 new JList(edges.toArray()));
         //dialog.setOnOk(e -> System.out.println("Chosen item: " + dialog.getSelectedItem()));
         dialog.show();
-        locationLabel.setText(n.getKey() + " > Info: " + n.getInfo());
     }
 
     /**
@@ -275,7 +325,6 @@ public class GraphUI extends JPanel implements MouseListener {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 
     public BufferedImage getScreenshot(){
